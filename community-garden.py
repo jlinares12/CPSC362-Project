@@ -5,8 +5,3 @@ app = Flask(__name__)
 @app.route("/")
 def community_garden():
     return render_template('home.html')
-
-@app.route("/something")
-def something():
-    words = "something page"
-    return words
