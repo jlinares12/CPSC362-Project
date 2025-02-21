@@ -29,7 +29,7 @@ nav a {
 }
 .hero {
     text-align: center;
-    padding: 50px 20px;
+    padding: 20px 20px;
     background-color: #6aa564;
     color: white;
     width: 100%;
@@ -40,7 +40,7 @@ nav a {
     padding: 20px;
     width: 100%;
 }
-.content div {
+.content div.map {
     background-color: white;
     padding: 20px;
     border-radius: 8px;

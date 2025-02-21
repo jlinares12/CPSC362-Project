@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css')}}">
+</head>
+<body>
+    <header>
+        <h1>Community</h1>
+        <p>Local Needs, Local Solutions</p>
+    </header>
+    <nav>
+        <a href="{{ url_for('home_page')}}">Home</a>
+        <a href="{{ url_for('resources_page')}}">Resources</a>
+        <a href="{{ url_for('volunteer_page')}}">Volunteer</a>
+        <a href="{{ url_for('donations_page')}}">Donate to a Garden</a>
+        <a href="{{ url_for('about_page')}}">About</a>
+        <a href="{{ url_for('login_page')}}">Login</a>
+        <a href="{{ url_for('register_page')}}">Register</a>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <p>&copy; 2023 Community. All rights reserved.</p>
+    </footer>
+</body>
+</html>
