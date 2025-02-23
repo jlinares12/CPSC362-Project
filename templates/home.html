@@ -4,14 +4,19 @@
 Home Page
 {% endblock %}
 
+{% block style %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/home.css')}}">
+{% endblock %}
+
 {% block content %}
     <div class="content">
         <div class="map">
             <h3>Map</h3>
             <p>Explore our local community map.</p>
         </div>
-        <div>
-            <input></input>
+        <div class="search">
+	        <input id="search" type="search" placeholder="Search">
         </div>
     </div>
 {% endblock %}
