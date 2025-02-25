@@ -1,7 +1,8 @@
 .content {
     display: block;
     padding: 20px;
-    width: 100%;
+    overflow-y: scroll;
+    height: 75vh;
 }
 .content div.map {
     background-color: white;
@@ -10,13 +11,41 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 30%;
+    width: min(75vw, 575px);
     text-align: center;
 }
-.content div.search input {
+div.search input {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
-    width: 50vw;
+    width: 75%;
+}
+div.gardens{
+    display:flexbox;
+    flex-wrap: wrap;
+    width: 75vw;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+#garden1{
+    background-color: blue;
+    padding: 75px;
+    margin-top: 1rem;
+}
+#garden2 {
+    background-color: aqua;
+    padding: 75px;
+    margin-top: 1rem;
+}
+#garden3 {
+    background-color: aquamarine;
+    padding: 75px;
+    margin-top: 1rem;
+}
+#garden4 {
+    background-color: cadetblue;
+    padding: 75px;
+    margin-top: 1rem;
 }
