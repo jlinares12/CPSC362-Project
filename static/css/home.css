@@ -33,9 +33,10 @@ div.gardens{
 div.gardens * {
     border-radius: 8px;
     margin-top: 1rem;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 75vw;
+    height: 20vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
 }
 #garden1{
     background-color: blue;
