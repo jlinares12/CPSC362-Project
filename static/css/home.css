@@ -10,7 +10,7 @@
     margin-right:auto;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     width: min(75vw, 575px);
     height:40vh;
     text-align: center;
@@ -30,23 +30,22 @@ div.gardens{
     margin-left: auto;
     margin-right: auto;
 }
+div.gardens * {
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 #garden1{
     background-color: blue;
-    padding: 75px;
-    margin-top: 1rem;
 }
 #garden2 {
     background-color: aqua;
-    padding: 75px;
-    margin-top: 1rem;
 }
 #garden3 {
     background-color: aquamarine;
-    padding: 75px;
-    margin-top: 1rem;
 }
 #garden4 {
     background-color: cadetblue;
-    padding: 75px;
-    margin-top: 1rem;
 }
