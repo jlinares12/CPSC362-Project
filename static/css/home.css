@@ -12,6 +12,7 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: min(75vw, 575px);
+    height:40vh;
     text-align: center;
 }
 div.search input {
@@ -19,7 +20,7 @@ div.search input {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
-    width: 75%;
+    width: 50%;
 }
 div.gardens{
     display:flexbox;
