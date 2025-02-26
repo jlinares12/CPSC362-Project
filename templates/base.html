@@ -23,11 +23,11 @@
             <a href="{{ url_for('volunteer_page')}}">Volunteer</a>
             <a href="{{ url_for('donations_page')}}">Donate to a Garden</a>
             <a href="{{ url_for('about_page')}}">About</a>
-            <a href="{{ url_for('login_page')}}">Login</a>
             <a href="{{ url_for('register_page')}}">Register</a>
+            <a href="{{ url_for('login_page')}}">Login</a>
         </nav>
+        <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
     </div>
-    <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
     {% block content %}
     {% endblock %}
     <div class="footer">
