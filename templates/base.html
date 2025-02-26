@@ -16,20 +16,24 @@
         <h1>Community</h1>
         <p>Local Needs, Local Solutions</p>
     </header>
-    <nav>
-        <a href="{{ url_for('home_page')}}">Home</a>
-        <a href="{{ url_for('resources_page')}}">Resources</a>
-        <a href="{{ url_for('volunteer_page')}}">Volunteer</a>
-        <a href="{{ url_for('donations_page')}}">Donate to a Garden</a>
-        <a href="{{ url_for('about_page')}}">About</a>
-        <a href="{{ url_for('login_page')}}">Login</a>
-        <a href="{{ url_for('register_page')}}">Register</a>
-    </nav>
+    <div class="nav-box">
+        <nav>
+            <a href="{{ url_for('home_page')}}">Home</a>
+            <a href="{{ url_for('resources_page')}}">Resources</a>
+            <a href="{{ url_for('volunteer_page')}}">Volunteer</a>
+            <a href="{{ url_for('donations_page')}}">Donate to a Garden</a>
+            <a href="{{ url_for('about_page')}}">About</a>
+            <a href="{{ url_for('login_page')}}">Login</a>
+            <a href="{{ url_for('register_page')}}">Register</a>
+        </nav>
+    </div>
     <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
     {% block content %}
     {% endblock %}
-    <footer>
-        <p>&copy; 2023 Community. All rights reserved.</p>
-    </footer>
+    <div class="footer">
+        <footer>
+            <p>&copy; 2023 Community. All rights reserved.</p>
+        </footer>
+    </div>
 </body>
 </html>

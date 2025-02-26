@@ -19,6 +19,8 @@ nav {
     justify-content: center;
     background-color: #ffffff;
     width: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 nav a {
     color: black;
@@ -27,8 +29,8 @@ nav a {
     font-weight: bold;
     font-size: min(2vw, 20px);
     padding: 10px 15px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 nav a:hover {
@@ -39,7 +41,7 @@ nav a.active {
     color: white;
     margin-top: -2px;
 }
-footer {
+.footer {
     background-color: #394e38;
     color: white;
     text-align: center;
