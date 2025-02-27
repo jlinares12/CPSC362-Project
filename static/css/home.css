@@ -14,7 +14,9 @@ div.search input {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
-    width: 50%;
+    width: 65%;
+    padding:0.30rem;
+    border-radius: 5px;
 }
 div.gardens{
     display:flexbox;
@@ -27,13 +29,12 @@ div.gardens{
 div.gardens * {
     border-radius: 8px;
     margin-top: 1rem;
-    width: 75vw;
-    height: 20vh;
+    height: 25vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     text-align: center;
 }
 #garden1{
-    background-color: blue;
+    background-color: lightcyan;
 }
 #garden2 {
     background-color: aqua;
