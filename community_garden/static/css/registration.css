@@ -40,7 +40,7 @@
     border: 0;
     outline: 0;
     height: 40px;
-    width: 100%;
+    width: calc(100% - 40px);
     border-bottom: 1px solid #eee;
     font-size: .9rem;
     padding: 8px 15px;
