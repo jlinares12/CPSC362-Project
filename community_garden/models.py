@@ -1,31 +1,44 @@
 from community_garden import db
+from sqlalchemy import JSON
 
+# Bridge to connect users and gardens to form a many-to-many relationship between volunteers and gardens
 user_garden_volunteer = db.Table(
-    'user_garden_volunteer',  # Name of the table
-    db.Column('user_id', db.Integer(), db.ForeignKey('user.id'), primary_key=True),  # Foreign key to User
-    db.Column('garden_id', db.Integer(), db.ForeignKey('garden.id'), primary_key=True)  # Foreign key to Garden
+    'user_garden_volunteer',                                                                # Name of the table
+    db.Column( 'user_id',   db.Integer(), db.ForeignKey( 'user.id'   ), primary_key=True ), # Foreign key to User
+    db.Column( 'garden_id', db.Integer(), db.ForeignKey( 'garden.id' ), primary_key=True )  # Foreign key to Garden
 )
 
 class User(db.Model):
-    id = db.Column( db.Integer(), primary_key=True, nullable=False, unique=True )
-    name = db.Column( db.String(length=30), nullable=False, unique=True )
-    email = db.Column( db.String(length=320), nullable=False, unique=True)
-    # Relationship to Garden (assuming a Garden table exists)
-    administered_gardens = db.relationship('Garden', backref='admin', lazy=True)
+    # Data
+    id            = db.Column( db.Integer(),            primary_key=True              )
+    name          = db.Column( db.String( length=50 ),  nullable=False,   unique=True )
+    email         = db.Column( db.String( length=65 ),  nullable=False,   unique=True )
+    password_hash = db.Column( db.String( length=60 ),  nullable=False                )
+    
+    # Relationships
+    administered_gardens = db.relationship( 'Garden', backref='admin', lazy=True )
+        # one-to-many relationship
+        # 'Garden' = Target Model, 
+        # 'admin' = how we will get the admin of a garden when referencing a garden (garden.admin)
+        # "lazy=True", allows us to get all gardens a user administer in one command
 
-    volunteer_gardens = db.relationship(
-        'Garden',  # Target model
-        secondary=user_garden_volunteer,  # Association table
-        backref='volunteers'  # Name of the reverse relationship
-    )
+    volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
+        # Many-to-many relationship
+        # 'Garden'  =  Target model
+        # 'user_garden_volunteer' = Association table
+        # 'volunteers' = allows us to get the list of volunteers when referencing a garden
+        # "lazy=True", allows us to get all garden's a use has volunteered in one command
 
     def __repr__(self):
         return f'{self.name}'
 
 class Garden(db.Model):
-    id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
-    name = db.Column(db.String(length=50), nullable=False)
-    admin_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
+    id             = db.Column( db.Integer(           ), primary_key=True                        )
+    name           = db.Column( db.String ( length=50 ), nullable=False                          )
+    street_address = db.Column( db.String ( length=70 ), nullable=False,           unique=True   )
+    city           = db.Column( db.String ( length=35 ), nullable=False                          )
+    wish_list      = db.Column( JSON                                                             )
+    admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
     
     def __repr__(self):
         return f'{self.name}'
