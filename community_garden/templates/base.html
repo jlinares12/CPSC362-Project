@@ -39,6 +39,22 @@
         <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
     </div>
 
+    <div class="alert {{category}}">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message">
+                        <button type="button" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <script src="{{url_for('static', filename='js/errorMessage.js')}}"></script>
+    </div>
+
     <div class="content">
     {% block content %}
     {% endblock %}

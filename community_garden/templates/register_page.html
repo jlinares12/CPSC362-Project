@@ -11,12 +11,13 @@ Register
 
 <div class="form-box">
     <form method="POST" class="form">
+        {{ form.hidden_tag() }}
         <span class="title">Sign up</span>
         <span class="subtitle">Register a garden or volunteer using an email</span>
         <div class="form-container">
             {{ form.name(class="input", placeholder="Full Name") }}
             {{ form.username(class="input", placeholder="Username") }}
-            {{ form.email_address(class="input", placeholder="Email") }}
+            {{ form.email(class="input", placeholder="Email") }}
             {{ form.password1(class="input", placeholder="Password") }}
             {{ form.password2(class="input", placeholder="Confirm Password") }}
         </div>
