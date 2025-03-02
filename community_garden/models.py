@@ -10,10 +10,11 @@ user_garden_volunteer = db.Table(
 
 class User(db.Model):
     # Data
-    id            = db.Column( db.Integer(),            primary_key=True              )
-    name          = db.Column( db.String( length=50 ),  nullable=False,   unique=True )
-    email         = db.Column( db.String( length=65 ),  nullable=False,   unique=True )
-    password_hash = db.Column( db.String( length=60 ),  nullable=False                )
+    id            = db.Column( db.Integer(),            primary_key=True            )
+    name          = db.Column( db.String( length=50 ),  nullable=False              )
+    username      = db.Column( db.String( length=50 ),  nullable=False, unique=True )
+    email         = db.Column( db.String( length=65 ),  nullable=False, unique=True )
+    password_hash = db.Column( db.String( length=60 ),  nullable=False              )
     
     # Relationships
     administered_gardens = db.relationship( 'Garden', backref='admin', lazy=True )
