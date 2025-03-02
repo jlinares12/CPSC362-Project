@@ -65,7 +65,7 @@
   }
   
   /*Button*/
-  .form button {
+  .form .button {
     background-color: #394e38;
     color: #fff;
     border: 0;
@@ -77,6 +77,6 @@
     transition: background-color .3s ease;
   }
   
-  .form button:hover {
+  .form .button:hover {
     background-color: #455e44;
   }
