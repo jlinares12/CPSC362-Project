@@ -1,6 +1,7 @@
 from community_garden import app
 from flask import render_template
 from community_garden.models import User
+from community_garden.forms import RegisterForm
 
 @app.route("/")
 @app.route("/home")
@@ -29,4 +30,5 @@ def login_page():
 
 @app.route('/register')
 def register_page():
-    return render_template('register_page.html')
+    form = RegisterForm()
+    return render_template('register_page.html', form=form)
