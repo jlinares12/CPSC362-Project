@@ -12,14 +12,13 @@ class User(db.Model):
     # Data
     id            = db.Column( db.Integer(),            primary_key=True            )
     name          = db.Column( db.String( length=50 ),  nullable=False              )
-    username      = db.Column( db.String( length=50 ),  nullable=False, unique=True )
+    username      = db.Column( db.String( length=20 ),  nullable=False, unique=True )
     email         = db.Column( db.String( length=65 ),  nullable=False, unique=True )
     password_hash = db.Column( db.String( length=60 ),  nullable=False              )
-    
     # Relationships
     administered_gardens = db.relationship( 'Garden', backref='admin', lazy=True )
         # one-to-many relationship
-        # 'Garden' = Target Model, 
+        # 'Garden' = Target Model,
         # 'admin' = how we will get the admin of a garden when referencing a garden (garden.admin)
         # "lazy=True", allows us to get all gardens a user administer in one command
 
@@ -40,6 +39,5 @@ class Garden(db.Model):
     city           = db.Column( db.String ( length=35 ), nullable=False                          )
     wish_list      = db.Column( JSON                                                             )
     admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
-    
     def __repr__(self):
         return f'{self.name}'
