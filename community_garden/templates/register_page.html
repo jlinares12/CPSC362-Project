@@ -6,18 +6,21 @@ Register
     {{super()}}
     <link rel="stylesheet" href="{{url_for('static',filename='css/registration.css')}}">
 {% endblock %}
+
 {% block content %}
+
 <div class="form-box">
-    <form class="form">
+    <form method="POST" class="form">
         <span class="title">Sign up</span>
-        <span class="subtitle">Register your community's garden using an email</span>
+        <span class="subtitle">Register a garden or volunteer using an email</span>
         <div class="form-container">
-            <input type="text" class="input" placeholder="Full Name"required>
-            <input type="email" class="input" placeholder="Email"required>
-            <input type="password" class="input" placeholder="Password"required>
-            <input type="password" class="input" placeholder="Confirm Password"required>
+            {{ form.name(class="input", placeholder="Full Name") }}
+            {{ form.username(class="input", placeholder="Username") }}
+            {{ form.email_address(class="input", placeholder="Email") }}
+            {{ form.password1(class="input", placeholder="Password") }}
+            {{ form.password2(class="input", placeholder="Confirm Password") }}
         </div>
-        <button>Sign up</button>
+        {{ form.submit(class="button")}}
     </form>
     <div class="form-section">
       <p>Have an account? <a href="{{url_for('login_page')}}">Log in</a> </p>
