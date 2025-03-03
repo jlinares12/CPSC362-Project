@@ -39,11 +39,11 @@
         <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
     </div>
 
-    <div class="alert {{category}}">
+    <div class="alert">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="message">
+                    <div class="message {{category}}">
                         <button type="button" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
