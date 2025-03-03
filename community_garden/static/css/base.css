@@ -45,6 +45,23 @@ nav a.active {
     color: white;
     margin-top: -2px;
 }
+.alert .message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert .message.danger {
+    background-color: rgb(248, 130, 130);
+    border-color: rgb(245, 108, 108);
+    color: rgb(59, 4, 10);
+}
+.alert .message.success {
+    background-color: #84a881;
+    border-color: #333;
+    color:#394e38
+}
 .content {
     flex: 1;
     margin-top: 1vw;
