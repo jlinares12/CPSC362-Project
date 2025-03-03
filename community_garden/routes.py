@@ -40,6 +40,7 @@ def register_page():
                               password_hash=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
+        flash(f'You created your account successfully! Welcome to the site', category='success')
         return redirect(url_for('login_page'))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
