@@ -10,3 +10,8 @@ class RegisterForm( FlaskForm ):
     password1 = PasswordField( label='password1', validators=[Length(min=10), DataRequired()] )
     password2 = PasswordField( label='password2', validators=[EqualTo('password1'), DataRequired()] )
     submit = SubmitField( label='Sign up' )
+
+class LoginForm (FlaskForm ):
+    username = StringField( label="Username", validators=[Length(min=3, max=50), DataRequired()])
+    password = PasswordField( label='Password', validators=[Length(min=10), DataRequired()] )
+    submit = SubmitField( label='Login' )
