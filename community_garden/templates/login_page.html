@@ -3,3 +3,25 @@
 {% block title %}
 Login
 {% endblock %}
+
+{% block style %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-box">
+        <form method="POST" class="form">
+            {{ form.hidden_tag() }}
+            <span class="title">Login</span>
+            <div class="form-container">
+                {{ form.username(class="input", placeholder="Username") }}
+                {{ form.password(class="input", placeholder="Password") }}
+            </div>
+            {{ form.submit(class="button")}}
+        </form>
+        <div class="form-section">
+            <p>Don't have an account? <a href="{{url_for('register_page')}}">Sign up</a> </p>
+        </div>
+    </div>
+{% endblock %}
