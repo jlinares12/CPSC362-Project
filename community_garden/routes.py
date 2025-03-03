@@ -1,7 +1,7 @@
 from community_garden import app
 from flask import render_template, redirect, url_for, flash
 from community_garden.models import User
-from community_garden.forms import RegisterForm
+from community_garden.forms import RegisterForm, LoginForm
 from community_garden import db
 
 @app.route("/")
@@ -25,9 +25,10 @@ def donations_page():
 def about_page():
     return render_template('about_page.html')
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login_page():
-    return render_template('login_page.html')
+    form = LoginForm()
+    return render_template('login_page.html', form=form)
 
 @app.route('/register', methods=['GET','POST'])
 def register_page():
