@@ -1,8 +1,8 @@
-from community_garden import app
+from community_garden import app, db
 from flask import render_template, redirect, url_for, flash
 from community_garden.models import User
 from community_garden.forms import RegisterForm, LoginForm
-from community_garden import db
+from flask_login import login_user
 
 @app.route("/")
 @app.route("/home")
@@ -28,6 +28,18 @@ def about_page():
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
     form = LoginForm()
+    if form.validate_on_submit():
+        attempted_user = User.query.filter_by(username=form.username.data).first()
+        if not attempted_user:
+            flash(f'That username was not found: ', category='danger')
+        elif attempted_user.check_password_correction(
+            form.password.data
+            ):
+            login_user(attempted_user)
+            flash(f'Login was successful! You are logged in as: {attempted_user.username}', category='success')
+            return redirect(url_for('home_page'))
+        else:
+            flash(f'The username and password did not match', category='danger')
     return render_template('login_page.html', form=form)
 
 @app.route('/register', methods=['GET','POST'])
