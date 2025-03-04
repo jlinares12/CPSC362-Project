@@ -1,5 +1,6 @@
 from community_garden import db
 from sqlalchemy import JSON
+from community_garden import bcrypt
 
 # Bridge to connect users and gardens to form a many-to-many relationship between volunteers and gardens
 user_garden_volunteer = db.Table(
@@ -21,6 +22,13 @@ class User(db.Model):
         # 'Garden' = Target Model,
         # 'admin' = how we will get the admin of a garden when referencing a garden (garden.admin)
         # "lazy=True", allows us to get all gardens a user administer in one command
+    @property
+    def password(self):
+        return self.password
+
+    @password.setter
+    def password(self, plain_text_password):
+        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
     volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
         # Many-to-many relationship
@@ -28,7 +36,7 @@ class User(db.Model):
         # 'user_garden_volunteer' = Association table
         # 'volunteers' = allows us to get the list of volunteers when referencing a garden
         # "lazy=True", allows us to get all garden's a use has volunteered in one command
-
+    
     def __repr__(self):
         return f'{self.name}'
 

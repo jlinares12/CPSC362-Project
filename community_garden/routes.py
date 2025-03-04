@@ -37,7 +37,7 @@ def register_page():
         user_to_create = User(name=form.name.data,
                               username=form.username.data,
                               email=form.email.data,
-                              password_hash=form.password1.data)
+                              password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
         flash(f'You created your account successfully! Welcome to the site', category='success')
