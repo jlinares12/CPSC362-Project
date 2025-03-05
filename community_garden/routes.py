@@ -1,7 +1,7 @@
 from community_garden import app, db
 from flask import render_template, redirect, url_for, flash
 from community_garden.models import User
-from community_garden.forms import RegisterForm, LoginForm
+from community_garden.forms import RegisterUserForm, LoginForm
 from flask_login import login_user, logout_user
 
 @app.route("/")
@@ -50,7 +50,7 @@ def logout():
 
 @app.route('/register', methods=['GET','POST'])
 def register_page():
-    form = RegisterForm()
+    form = RegisterUserForm()
     if form.validate_on_submit():
         user_to_create = User(name=form.name.data,
                               username=form.username.data,
