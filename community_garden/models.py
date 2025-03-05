@@ -55,5 +55,6 @@ class Garden(db.Model):
     city           = db.Column( db.String ( length=35 ), nullable=False                          )
     wish_list      = db.Column( JSON                                                             )
     admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
+    photo          = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
     def __repr__(self):
         return f'{self.name}'
