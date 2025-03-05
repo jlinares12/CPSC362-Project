@@ -60,7 +60,7 @@ nav a.active {
 .alert .message.success {
     background-color: #84a881;
     border-color: #333;
-    color:#394e38
+    color: rgb(59, 4, 10);
 }
 .content {
     flex: 1;
