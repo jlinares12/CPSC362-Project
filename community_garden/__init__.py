@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-#pip install flask_bcrypt
 from flask_bcrypt import Bcrypt
-#pip install flask_login
 from flask_login import LoginManager
 from dotenv import dotenv_values
 
