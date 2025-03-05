@@ -1,10 +1,11 @@
 # run in terminal on laptop: pip install flask-wtf
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from community_garden.models import User
 
-class RegisterForm( FlaskForm ):
+class RegisterUserForm( FlaskForm ):
     def validate_username(self, username_to_validate):
         user = User.query.filter_by(username=username_to_validate.data).first()
         if user:
@@ -26,3 +27,11 @@ class LoginForm (FlaskForm ):
     username = StringField( label="Username", validators=[DataRequired()])
     password = PasswordField( label='Password', validators=[DataRequired()] )
     submit = SubmitField( label='Login' )
+
+class RegisterGardenForm( FlaskForm ):
+    name = StringField( label="name", validators=[DataRequired()])
+    street_address = StringField( label="street", validators=[DataRequired()])
+    city = StringField( label="city", validators=[DataRequired()])
+    wish_list = StringField( label="wish list", validators=[DataRequired()])
+    photo = FileField(validators=[FileRequired()])
+    submit = SubmitField( label='Register' )
