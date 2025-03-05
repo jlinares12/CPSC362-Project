@@ -19,8 +19,13 @@
 
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
-        <a href="{{ url_for('login_page')}}">Login</a>
-        <a href="{{ url_for('register_page')}}">Register</a>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout')}}">Logout</a>
+            <a href="#">Profile</a>
+        {% else %}
+            <a href="{{ url_for('login_page')}}">Login</a>
+            <a href="{{ url_for('register_page')}}">Register</a>
+        {% endif %}
         <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
     </div>
 
