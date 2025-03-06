@@ -1,7 +1,7 @@
 from community_garden import app, db
 from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User
-from community_garden.forms import RegisterUserForm, LoginForm
+from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 
@@ -68,3 +68,18 @@ def register_page():
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
     return render_template('register_page.html', form=form)
+
+@app.route('/register-garden', methods=['GET', 'POST'])
+@login_required
+def register_garden():
+    form = RegisterGardenForm()
+    if form.validate_on_submit():
+        #save photo file to our photo directory and pass the file name to Garden.photo
+        garden_to_create = Garden(name=form.name.data,
+                                  street_address=form.street_address.data,
+                                  city=form.city.data,
+                                  wish_list=form.wish_list.data,
+                                  admin_id=current_user.id
+                                  #pass in file route name)
+                                  )
+    return render_template('register_garden.html', form=form)
