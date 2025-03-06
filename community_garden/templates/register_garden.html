@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+Register
+{% endblock %}
+{% block style %}
+    {{super()}}
+{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    <form method="POST" class="form">
+        {{ form.hidden_tag() }}
+        <span class="title">Register A Garden</span>
+        <div class="form-container">
+            {{ form.name(class="input", placeholder="Garden Name") }}
+            {{ form.street_address(class="input", placeholder="Street Address") }}
+            {{ form.city(class="input", placeholder="City") }}
+            <label for="wish_list">List a few things you would wish people would donate</label>
+            {{ form.wish_list(id="wish_list", class="input", placeholder="") }}
+            {{ form.photo(class="input", placeholder="Photo") }}
+        </div>
+        {{ form.submit(class="button")}}
+    </form>
+</div>
+{% endblock %}
