@@ -21,7 +21,7 @@
     <div class="sidebar" id="sidebar">
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('logout')}}">Logout</a>
-            <a href="#">Profile</a>
+            <a href="{{ url_for('profile_page')}}">Profile</a>
         {% else %}
             <a href="{{ url_for('login_page')}}">Login</a>
             <a href="{{ url_for('register_page')}}">Register</a>
