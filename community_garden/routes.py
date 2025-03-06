@@ -1,8 +1,9 @@
 from community_garden import app, db
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User
 from community_garden.forms import RegisterUserForm, LoginForm
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required, current_user
+from django.utils.http import url_has_allowed_host_and_scheme
 
 @app.route("/")
 @app.route("/home")
@@ -21,25 +22,27 @@ def volunteer_page():
 def donations_page():
     return render_template('donations_page.html')
 
-@app.route('/about')
-def about_page():
-    return render_template('about_page.html')
+@app.route('/profile')
+@login_required
+def profile_page():
+    return render_template('profile_page.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
+    if current_user.is_authenticated:
+        return redirect(url_for('home_page'))
     form = LoginForm()
     if form.validate_on_submit():
         attempted_user = User.query.filter_by(username=form.username.data).first()
-        if not attempted_user:
-            flash(f'That username was not found: ', category='danger')
-        elif attempted_user.check_password_correction(
-            form.password.data
-            ):
-            login_user(attempted_user)
-            flash(f'Login was successful! You are logged in as: {attempted_user.username}', category='success')
+        if not attempted_user or not attempted_user.check_password_correction(form.password.data):
+            flash(f'Invalid username or password', category='danger')
+            return redirect(url_for('login_page'))
+        login_user(attempted_user)
+        next = request.args.get('next')
+        flash(f'Login was successful! You are logged in as: {attempted_user.username}', category='success')
+        if not url_has_allowed_host_and_scheme(next, request.host):
             return redirect(url_for('home_page'))
-        else:
-            flash(f'The username and password did not match', category='danger')
+        return redirect(next)
     return render_template('login_page.html', form=form)
 
 @app.route('/logout')
@@ -58,8 +61,9 @@ def register_page():
                               password=form.password1.data)
         db.session.add(user_to_create)
         db.session.commit()
-        flash(f'You created your account successfully! Welcome to the site', category='success')
-        return redirect(url_for('login_page'))
+        login_user(user_to_create)
+        flash(f'You created your account successfully! Welcome to the site {user_to_create.username}', category='success')
+        return redirect(url_for('profile_page'))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
