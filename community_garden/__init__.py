@@ -11,5 +11,7 @@ app.config['SECRET_KEY'] = secrets['DEV_KEY'] # Saves a secret key to be able to
 db = SQLAlchemy(app)    # Create an instance of SQLAlchemy called db that takes our flask app as a parameter
 bcrypt = Bcrypt(app)    # Create an instance of Bcrypt using our app as a parameter
 login_manager = LoginManager(app)
+login_manager.login_view = 'login_page'
+login_manager.login_message_category = 'danger'
 
 from community_garden import routes
