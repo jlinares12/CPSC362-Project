@@ -1,5 +1,4 @@
 from community_garden import db, bcrypt, login_manager
-from sqlalchemy import JSON
 from flask_login import UserMixin
 
 
@@ -35,8 +34,8 @@ class User(db.Model, UserMixin):
     def password(self, plain_text_password):
         self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
-    def check_password_correction(self, attempted_passaword):
-        return bcrypt.check_password_hash(self.password_hash, attempted_passaword)
+    def check_password_correction(self, attempted_password):
+        return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
     volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
         # Many-to-many relationship
@@ -49,11 +48,11 @@ class User(db.Model, UserMixin):
         return f'{self.name}'
 
 class Garden(db.Model):
-    id             = db.Column( db.Integer(           ), primary_key=True                        )
-    name           = db.Column( db.String ( length=50 ), nullable=False                          )
-    street_address = db.Column( db.String ( length=70 ), nullable=False,           unique=True   )
-    city           = db.Column( db.String ( length=35 ), nullable=False                          )
-    wish_list      = db.Column( JSON                                                             )
+    id             = db.Column( db.Integer(            ), primary_key=True                        )
+    name           = db.Column( db.String ( length=50  ), nullable=False                          )
+    street_address = db.Column( db.String ( length=70  ), nullable=False,           unique=True   )
+    city           = db.Column( db.String ( length=35  ), nullable=False                          )
+    wish_list      = db.Column( db.String ( length=200 )                                          )
     admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
     photo          = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
     def __repr__(self):
