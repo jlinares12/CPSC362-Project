@@ -16,7 +16,8 @@ def resources_page():
 
 @app.route('/volunteer')
 def volunteer_page():
-    return render_template('volunteer_page.html')
+    gardens = Garden.query.all()
+    return render_template('volunteer_page.html', gardens=gardens)
 
 @app.route('/donate')
 def donations_page():

@@ -3,3 +3,11 @@
 {% block title %}
 Volunteer
 {% endblock %}
+
+{% block content %}
+{% for garden in gardens %}
+    <div>{{garden.name}}<br>
+        <img src="../static/img/{{garden.photo}}">
+    </div>
+{% endfor %}
+{% endblock %}
