@@ -1,6 +1,6 @@
-from community_garden import app, db
+from community_garden import app, db, photos
 from flask import render_template, redirect, url_for, flash, request
-from community_garden.models import User
+from community_garden.models import User, Garden
 from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -74,12 +74,18 @@ def register_page():
 def register_garden():
     form = RegisterGardenForm()
     if form.validate_on_submit():
-        #save photo file to our photo directory and pass the file name to Garden.photo
-        garden_to_create = Garden(name=form.name.data,
-                                  street_address=form.street_address.data,
-                                  city=form.city.data,
-                                  wish_list=form.wish_list.data,
-                                  admin_id=current_user.id
-                                  #pass in file route name)
-                                  )
+        filename = photos.save(form.photo.data)
+        garden_to_create = Garden( name = form.name.data,
+                                   street_address = form.street_address.data,
+                                   city = form.city.data,
+                                   wish_list = form.wish_list.data,
+                                   admin_id = current_user.id,
+                                   photo = filename )
+        db.session.add(garden_to_create)
+        db.session.commit()
+        flash(f'You created {garden_to_create.name} successfully!', category='success')
+        return redirect(url_for('profile_page'))
+    if form.errors != {}:                                           # If there are errors from the validations
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating your garden: {err_msg}', category='danger')
     return render_template('register_garden.html', form=form)
