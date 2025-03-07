@@ -9,7 +9,7 @@ Register
 {% block content %}
 
 <div class="form-box">
-    <form method="POST" class="form">
+    <form method="POST" class="form", enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <span class="title">Register A Garden</span>
         <div class="form-container">
