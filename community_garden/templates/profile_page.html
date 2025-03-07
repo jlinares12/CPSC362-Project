@@ -1,1 +1,45 @@
 {% extends 'base.html' %}
+
+{% block title %}
+Profile Page
+{% endblock %}
+
+{% block style %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/profile.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h1>{{ current_user.username }}</h1>
+        <p>{{ current_user.email }}</p>
+    </div>
+
+    <!-- Profile Details -->
+    <div class="profile-details">
+        <div class="detail">
+            <label>Full Name:</label>
+            <p>{{ current_user.name }}</p>
+        </div>
+        <div class="detail">
+            <label>Registered Gardens:</label>
+            {% for garden in current_user.administered_gardens %}
+            <p>{{ garden.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Edit Profile Button -->
+    <div class="edit-profile">
+        <a href="#" class="edit-profile-btn">Edit Profile</a>
+    </div>
+
+    <!-- Additional Options -->
+    <div class="profile-options">
+        <a href="#" class="option-btn">Change Password</a>
+        <a href="{{ url_for('logout') }}" class="option-btn logout">Logout</a>
+    </div>
+</div>
+{% endblock %}
