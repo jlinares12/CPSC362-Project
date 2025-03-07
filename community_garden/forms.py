@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
-from community_garden.models import User
+from community_garden.models import User, Garden
 
 class RegisterUserForm( FlaskForm ):
     def validate_username(self, username_to_validate):
@@ -33,5 +33,10 @@ class RegisterGardenForm( FlaskForm ):
     street_address = StringField( label="street", validators=[DataRequired()])
     city = StringField( label="city", validators=[DataRequired()])
     wish_list = StringField( label="wish list", validators=[DataRequired()])
-    photo = FileField(validators=[FileRequired()])
+    photo = FileField('photo',validators=[FileRequired()])
     submit = SubmitField( label='Register' )
+
+    def validate_street_address(self, address_to_validate):
+        garden = Garden.query.filter_by(street_address=address_to_validate.data).first()
+        if garden:
+            raise ValidationError('A garden with that address already exists!')
