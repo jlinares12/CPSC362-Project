@@ -9,6 +9,7 @@ body {
     min-height: 100vh;
 }
 header {
+    display:flex;
     background-color: #84a881;
     color: white;
     padding: 10px 0;
@@ -17,14 +18,13 @@ header {
 }
 .nav-box {
     display:flex;
+    margin-left:auto;
+    margin-right:0;
 }
 nav {
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
     width: 100%;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
 }
 nav a {
     color: black;
@@ -33,20 +33,17 @@ nav a {
     font-weight: bold;
     font-size: min(4vw, 20px);
     padding: 10px 15px;
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 nav a:hover {
-    background-color: #ddd;
+    color: #ddd;
 }
 nav a.active {
-    background-color: #84a881;
     color: white;
-    margin-top: -2px;
 }
 .alert .message {
     padding: 10px;
+    margin-top: 10px;
     margin-bottom: 10px;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -73,48 +70,4 @@ nav a.active {
     text-align: center;
     padding: 10px 0;
     width: 100%;
-}
-/* Hamburger Menu */
-.hamburger {
-    content:left;
-    display: flexbox;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 10px;
-}
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: black;
-    border-radius: 10px;
-    margin: 4px 0;
-}
-/* Sidebar */
-.sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #f8f9fa;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-    z-index: 1000;
-}
-.sidebar.open {
-    width: 250px; /* Set a fixed width when the sidebar is open */
-}
-.sidebar a {
-    padding: 10px 15px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #333;
-    display: block;
-    transition: 0.3s;
-    white-space: nowrap; /* Prevent text from wrapping */
-}
-
-.sidebar a:hover {
-    background-color: #ddd;
 }

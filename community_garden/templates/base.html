@@ -13,38 +13,27 @@
 </head>
 <body>
     <header>
-        <h1>Community Garden Tracker</h1>
-        <p>Local Needs, Local Solutions</p>
+        <div class="logo">
+            <h1>Community Garden Tracker</h1>
+            <p>Local Needs, Local Solutions</p>
+        </div>
+        <div class="nav-box">
+            <nav>
+                <a href="{{ url_for('home_page')}}">Home</a>
+                <a href="{{ url_for('resources_page')}}">About Us</a>
+                <a href="{{url_for('resources_page')}}">Resources</a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('profile_page')}}">Profile</a>
+                    <a href="{{ url_for('register_garden')}}">Register a Garden</a>
+                    <a href="{{ url_for('logout')}}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login_page')}}">Login</a>
+                    <a href="{{ url_for('register_page')}}">Sign up</a>
+                {% endif %}
+            </nav>
+            <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
+        </div>
     </header>
-
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        {% if current_user.is_authenticated %}
-            <a href="{{ url_for('logout')}}">Logout</a>
-            <a href="{{ url_for('profile_page')}}">Profile</a>
-            <a href="{{ url_for('register_garden')}}">Register a Garden</a>
-            <a href="#">Volunteer History</a>
-        {% else %}
-            <a href="{{ url_for('login_page')}}">Login</a>
-            <a href="{{ url_for('register_page')}}">Register</a>
-        {% endif %}
-        <script src="{{ url_for('static', filename='js/sidebar.js') }}"></script>
-    </div>
-
-    <div class="nav-box">
-        <nav>
-            <a href="{{ url_for('home_page')}}">Home</a>
-            <a href="{{ url_for('resources_page')}}">Resources</a>
-            <a href="{{ url_for('volunteer_page')}}">Volunteer</a>
-            <a href="{{ url_for('donations_page')}}">Donate to a Garden</a>
-            <a class="hamburger" onclick="toggleSidebar()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </a>
-        </nav>
-        <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
-    </div>
 
     <div class="alert">
         {% with messages = get_flashed_messages(with_categories=true) %}
