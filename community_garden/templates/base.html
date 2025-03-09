@@ -23,7 +23,7 @@
                 <a href="{{ url_for('about_us_page')}}">About Us</a>
                 <a href="{{url_for('resources_page')}}">Resources</a>
                 {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('profile_page')}}">Profile</a>
+                    <a href="{{ url_for('profile_page',username=current_user.username)}}">Profile</a>
                     <a href="{{ url_for('register_garden')}}">Register a Garden</a>
                     <a href="{{ url_for('logout')}}">Logout</a>
                 {% else %}

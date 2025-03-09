@@ -24,10 +24,19 @@ def about_us_page():
 def donations_page():
     return render_template('donations_page.html')
 
+@app.route('/profile/<username>')
+@login_required
+def profile_page(username):
+    # Ensure the username in the URL matches the logged-in user
+    if username != current_user.username:
+        return redirect(url_for('profile_page', username=current_user.username))
+    return render_template('profile_page.html', username=current_user.username)
+
 @app.route('/profile')
 @login_required
-def profile_page():
-    return render_template('profile_page.html')
+def redirect_to_profile():
+    # Redirect to the profile page with the logged-in user's username
+    return redirect(url_for('profile_page', username=current_user.username))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
