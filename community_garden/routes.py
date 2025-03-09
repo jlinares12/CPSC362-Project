@@ -8,7 +8,8 @@ from django.utils.http import url_has_allowed_host_and_scheme
 @app.route("/")
 @app.route("/home")
 def home_page():
-    return render_template('home.html')
+    gardens = Garden.query.all()
+    return render_template('home.html', gardens=gardens)
 
 @app.route('/resources')
 def resources_page():
