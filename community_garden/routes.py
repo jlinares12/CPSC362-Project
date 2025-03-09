@@ -14,10 +14,10 @@ def home_page():
 def resources_page():
     return render_template('resources_page.html')
 
-@app.route('/volunteer')
-def volunteer_page():
+@app.route('/about-us')
+def about_us_page():
     gardens = Garden.query.all()
-    return render_template('volunteer_page.html', gardens=gardens)
+    return render_template('about_us_page.html', gardens=gardens)
 
 @app.route('/donate')
 def donations_page():
