@@ -8,24 +8,36 @@ body {
     background-color: #f4f4f4;
     min-height: 100vh;
 }
+
 header {
-    display:flex;
+    display: flex;
+    justify-content: space-between; /* Space out logo and nav */
+    align-items: flex-start; /* Align items to the top */
     background-color: #84a881;
     color: white;
-    padding: 10px 0;
     width: 100%;
-    text-align: center;
+    padding: 0; /* Remove padding to hug the top */
 }
+
+.logo {
+    min-width: 200px; /* Prevent logo from shrinking too much */
+    padding: 10px 20px; /* Add padding to the logo */
+    margin: 0; /* Remove margin to hug the top */
+}
+
 .nav-box {
-    display:flex;
-    margin-left:auto;
-    margin-right:0;
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 10px 20px; /* Add padding to the nav box */
 }
+
 nav {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap; /* Allow nav items to wrap on smaller screens */
     width: 100%;
 }
+
 nav a {
     color: black;
     text-decoration: none;
@@ -35,12 +47,39 @@ nav a {
     padding: 10px 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 nav a:hover {
     color: #ddd;
 }
+
 nav a.active {
     color: white;
 }
+
+@media (max-width: 500px) {
+    header {
+        flex-direction: column; /* Stack logo and nav vertically */
+        align-items: center; /* Center items horizontally */
+    }
+
+    .nav-box {
+        margin-left: 0; /* Reset margin for smaller screens */
+        width: 100%; /* Full width for nav box */
+        padding: 10px 0; /* Adjust padding for stacked layout */
+    }
+
+    nav {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* Center nav items horizontally */
+    }
+
+    nav a {
+        width: 100%; /* Full width for nav links */
+        text-align: center; /* Center text in nav links */
+        padding: 10px 0; /* Adjust padding for stacked layout */
+    }
+}
+
 .alert .message {
     padding: 10px;
     margin-top: 10px;
@@ -54,6 +93,7 @@ nav a.active {
     border-color: rgb(245, 108, 108);
     color: rgb(59, 4, 10);
 }
+
 .alert .message.success {
     background-color: #84a881;
     border-color: #333;
