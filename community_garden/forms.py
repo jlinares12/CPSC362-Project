@@ -1,7 +1,7 @@
 # run in terminal on laptop: pip install flask-wtf
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, TextAreaField, SubmitField, URLField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from community_garden.models import User, Garden
 
@@ -32,7 +32,11 @@ class RegisterGardenForm( FlaskForm ):
     name = StringField( label="name", validators=[DataRequired()])
     street_address = StringField( label="street", validators=[DataRequired()])
     city = StringField( label="city", validators=[DataRequired()])
-    wish_list = StringField( label="wish list", validators=[DataRequired()])
+    state = StringField( label="state", validators=[DataRequired()])
+    zip_code = StringField( label="zip_code", validators=[DataRequired()])
+    description = TextAreaField( label="description", validators=[DataRequired()])
+    wish_list = TextAreaField( label="wish list", validators=[DataRequired()])
+    donation_link = URLField( label="donation link", validators=[DataRequired()])
     photo = FileField('photo',validators=[FileRequired()])
     submit = SubmitField( label='Register' )
 
@@ -40,3 +44,7 @@ class RegisterGardenForm( FlaskForm ):
         garden = Garden.query.filter_by(street_address=address_to_validate.data).first()
         if garden:
             raise ValidationError('A garden with that address already exists!')
+    def validate_description(self, description_to_validate):
+        garden = Garden.query.filter_by(description=description_to_validate.data).first()
+        if garden:
+            raise ValidationError('A garden with that description already exists!')

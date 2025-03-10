@@ -5,9 +5,7 @@ Register
 {% block style %}
     {{super()}}
 {% endblock %}
-
 {% block content %}
-
 <div class="form-box">
     <form method="POST" class="form", enctype="multipart/form-data">
         {{ form.hidden_tag() }}
@@ -16,8 +14,12 @@ Register
             {{ form.name(class="input", placeholder="Garden Name") }}
             {{ form.street_address(class="input", placeholder="Street Address") }}
             {{ form.city(class="input", placeholder="City") }}
+            {{ form.state(class="input", placeholder="State") }}
+            {{ form.zip_code(class="input", placeholder="zip code") }}
+            {{ form.description(class="input", placeholder="Description of your garden") }}
             <label for="wish_list">List a few things you would wish people would donate</label>
             {{ form.wish_list(id="wish_list", class="input", placeholder="") }}
+            {{ form.donation_link(id="Donation link", class="input", placeholder="Donation link") }}
             {{ form.photo(class="input", placeholder="Photo") }}
         </div>
         {{ form.submit(class="button")}}
