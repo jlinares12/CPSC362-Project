@@ -45,6 +45,11 @@ div.gardens .banner {
     overflow:hidden;
 }
 
+div.gardens a{
+    text-decoration: none;
+    color: inherit;
+}
+
 div.gardens .banner:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }

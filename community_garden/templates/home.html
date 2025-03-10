@@ -19,26 +19,30 @@ Home Page
     </div>
     <div class="gardens">
         {% for garden in gardens %}
-            <div class="banner">
-                <div class="garden-picture">
-                    <img src="../static/img/{{garden.photo}}">
-                </div>
-                <div class="garden-content">
-                    <div class="title">
-                        <h2>{{garden.name}}</h2>
+            <a href="{{ url_for('garden_profile', garden=garden)}}">
+                <div class="banner">
+                    <div class="garden-picture">
+                        <img src="../static/img/{{garden.photo}}">
                     </div>
-                    <div class="info">
-                        <div class="address">
-                            <h3>Address</h3>
-                            <p>{{ garden.street_address }} {{ garden.city }}</p>
+                    <div class="garden-content">
+                        <div class="title">
+                            <h2>{{garden.name}}</h2>
                         </div>
-                        <div class="desctiption">
-                            <h3>Desctiption</h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quia corporis, error deleniti itaque aspernatur sint laboriosam eaque impedit assumenda. Impedit, laborum qui reprehenderit consequuntur voluptatem alias illo possimus delectus.</p>
+                        <div class="info">
+                            <div class="address">
+                                <h3>Address</h3>
+                                <p>{{ garden.street_address }}<br>
+                                    {{ garden.city }}, {{ garden.state }} {{garden.zip_code}}
+                                </p>
+                            </div>
+                            <div class="desctiption">
+                                <h3>Desctiption</h3>
+                                <p>{{ garden.description }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
 {% endblock %}
