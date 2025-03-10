@@ -20,9 +20,10 @@ def about_us_page():
     gardens = Garden.query.all()
     return render_template('about_us_page.html', gardens=gardens)
 
-@app.route('/donate')
-def donations_page():
-    return render_template('donations_page.html')
+@app.route('/garden-profile/<garden>')
+def garden_profile(garden):
+    current_garden = Garden.query.filter_by(name=garden).first()
+    return render_template('garden_profile.html', garden = current_garden)
 
 @app.route('/profile/<username>')
 @login_required
@@ -74,7 +75,7 @@ def register_page():
         db.session.commit()
         login_user(user_to_create)
         flash(f'You created your account successfully! Welcome to the site {user_to_create.username}', category='success')
-        return redirect(url_for('profile_page'))
+        return redirect(url_for('profile_page', username=current_user.username))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
             flash(f'There was an error with creating a user: {err_msg}', category='danger')
@@ -89,13 +90,17 @@ def register_garden():
         garden_to_create = Garden( name = form.name.data,
                                    street_address = form.street_address.data,
                                    city = form.city.data,
+                                   state = form.state.data,
+                                   zip_code = form.zip_code.data,
+                                   description = form.description.data,
                                    wish_list = form.wish_list.data,
+                                   donation_link = form.donation_link.data,
                                    admin_id = current_user.id,
-                                   photo = filename )
+                                   photo = filename, )
         db.session.add(garden_to_create)
         db.session.commit()
         flash(f'You created {garden_to_create.name} successfully!', category='success')
-        return redirect(url_for('profile_page'))
+        return redirect(url_for('profile_page', username=current_user.username))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
             flash(f'There was an error with creating your garden: {err_msg}', category='danger')
