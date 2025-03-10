@@ -52,7 +52,11 @@ class Garden(db.Model):
     name           = db.Column( db.String ( length=50  ), nullable=False                          )
     street_address = db.Column( db.String ( length=70  ), nullable=False,           unique=True   )
     city           = db.Column( db.String ( length=35  ), nullable=False                          )
+    state          = db.Column( db.String ( length=2   )                                          )
+    zip_code       = db.Column( db.String ( length=5)                                             )
     wish_list      = db.Column( db.String ( length=200 )                                          )
+    description    = db.Column( db.String ( length=500 ), unique=True                             )
+    donation_link  = db.Column( db.String ( length=500 ))
     admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
     photo          = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
     def __repr__(self):
