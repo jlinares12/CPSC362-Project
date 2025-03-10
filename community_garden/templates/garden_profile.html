@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Garden Profile
+{% endblock %}
+
+{% block style %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <h1>This page is for {{garden.name}}</h1>
+    <a href="{{garden.donation_link}}" target="_blank">Donate</a>
+    <p>{{garden.description}}</p>
+{% endblock %}
