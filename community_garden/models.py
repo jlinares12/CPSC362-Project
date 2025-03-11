@@ -26,6 +26,13 @@ class User(db.Model, UserMixin):
         # 'Garden' = Target Model,
         # 'admin' = how we will get the admin of a garden when referencing a garden (garden.admin)
         # "lazy=True", allows us to get all gardens a user administer in one command
+    volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
+        # Many-to-many relationship
+        # 'Garden'  =  Target model
+        # 'user_garden_volunteer' = Association table
+        # 'volunteers' = allows us to get the list of volunteers when referencing a garden
+        # "lazy=True", allows us to get all garden's a use has volunteered in one command
+
     @property
     def password(self):
         return self.password
@@ -37,27 +44,21 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
-    volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
-        # Many-to-many relationship
-        # 'Garden'  =  Target model
-        # 'user_garden_volunteer' = Association table
-        # 'volunteers' = allows us to get the list of volunteers when referencing a garden
-        # "lazy=True", allows us to get all garden's a use has volunteered in one command
-
     def __repr__(self):
         return f'{self.name}'
 
 class Garden(db.Model):
-    id             = db.Column( db.Integer(            ), primary_key=True                        )
-    name           = db.Column( db.String ( length=50  ), nullable=False                          )
-    street_address = db.Column( db.String ( length=70  ), nullable=False,           unique=True   )
-    city           = db.Column( db.String ( length=35  ), nullable=False                          )
-    state          = db.Column( db.String ( length=2   )                                          )
-    zip_code       = db.Column( db.String ( length=5)                                             )
-    wish_list      = db.Column( db.String ( length=200 )                                          )
-    description    = db.Column( db.String ( length=500 ), unique=True                             )
-    donation_link  = db.Column( db.String ( length=500 ))
-    admin_id       = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
-    photo          = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
+    id                 = db.Column( db.Integer(            ), primary_key=True                        )
+    name               = db.Column( db.String ( length=50  ), nullable=False                          )
+    street_address     = db.Column( db.String ( length=70  ), nullable=False,           unique=True   )
+    city               = db.Column( db.String ( length=35  ), nullable=False                          )
+    state              = db.Column( db.String ( length=2   )                                          )
+    zip_code           = db.Column( db.String ( length=5   )                                          )
+    hours_of_operation = db.Column( db.String ( length=70  ), nullable=False                          )
+    wish_list          = db.Column( db.String ( length=200 )                                          )
+    description        = db.Column( db.String ( length=500 ), unique=True                             )
+    donation_link      = db.Column( db.String ( length=500 ))
+    admin_id           = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
+    photo              = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
     def __repr__(self):
         return f'{self.name}'
