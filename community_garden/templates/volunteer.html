@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Volunteer Sign Up
+{% endblock %}
+
+{% block content %}
+    <h1>This volunteer sign up is for {{garden.name}}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.date() }}
+        {{ form.time()}}
+        {{ form.message() }}
+        {{ form.submit() }}
+    </form>
+{% endblock %}
