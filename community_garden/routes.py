@@ -87,16 +87,18 @@ def register_garden():
     form = RegisterGardenForm()
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
-        garden_to_create = Garden( name = form.name.data,
-                                   street_address = form.street_address.data,
-                                   city = form.city.data,
-                                   state = form.state.data,
-                                   zip_code = form.zip_code.data,
-                                   description = form.description.data,
-                                   wish_list = form.wish_list.data,
-                                   donation_link = form.donation_link.data,
-                                   admin_id = current_user.id,
-                                   photo = filename, )
+        garden_to_create = Garden( 
+            name = form.name.data,
+            street_address = form.street_address.data,
+            city = form.city.data,
+            state = form.state.data,
+            zip_code = form.zip_code.data,
+            hours_of_operation = form.hours_of_operation.data,
+            description = form.description.data,
+            wish_list = form.wish_list.data,
+            donation_link = form.donation_link.data,
+            admin_id = current_user.id,
+            photo = filename, )
         db.session.add(garden_to_create)
         db.session.commit()
         flash(f'You created {garden_to_create.name} successfully!', category='success')
