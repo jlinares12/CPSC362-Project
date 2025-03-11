@@ -1,17 +1,16 @@
 from community_garden import db, bcrypt, login_manager
 from flask_login import UserMixin
 
-
-# Bridge to connect users and gardens to form a many-to-many relationship between volunteers and gardens
-user_garden_volunteer = db.Table(
-    'user_garden_volunteer',                                                                # Name of the table
-    db.Column( 'user_id',   db.Integer(), db.ForeignKey( 'user.id'   ), primary_key=True ), # Foreign key to User
-    db.Column( 'garden_id', db.Integer(), db.ForeignKey( 'garden.id' ), primary_key=True )  # Foreign key to Garden
-)
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+# Bridge to connect users and gardens to form a many-to-many relationship between volunteers and gardens
+user_garden_volunteer = db.Table(
+    'user_garden_volunteer',
+    db.Column( 'user_id',   db.Integer(), db.ForeignKey( 'user.id'   ), primary_key=True ), # Foreign key to User
+    db.Column( 'garden_id', db.Integer(), db.ForeignKey( 'garden.id' ), primary_key=True )  # Foreign key to Garden
+)
 
 class User(db.Model, UserMixin):
     # Data
@@ -26,7 +25,7 @@ class User(db.Model, UserMixin):
         # 'Garden' = Target Model,
         # 'admin' = how we will get the admin of a garden when referencing a garden (garden.admin)
         # "lazy=True", allows us to get all gardens a user administer in one command
-    volunteered_gardens = db.relationship( 'Garden', secondary=user_garden_volunteer, backref='volunteers', lazy=True )
+    volunteered_gardens = db.relationship('Garden', secondary=user_garden_volunteer, backref='volunteer_list', lazy=True)
         # Many-to-many relationship
         # 'Garden'  =  Target model
         # 'user_garden_volunteer' = Association table
@@ -48,17 +47,18 @@ class User(db.Model, UserMixin):
         return f'{self.name}'
 
 class Garden(db.Model):
-    id                 = db.Column( db.Integer(            ), primary_key=True                        )
-    name               = db.Column( db.String ( length=50  ), nullable=False                          )
-    street_address     = db.Column( db.String ( length=70  ), nullable=False,           unique=True   )
-    city               = db.Column( db.String ( length=35  ), nullable=False                          )
-    state              = db.Column( db.String ( length=2   )                                          )
-    zip_code           = db.Column( db.String ( length=5   )                                          )
-    hours_of_operation = db.Column( db.String ( length=70  ), nullable=False                          )
-    wish_list          = db.Column( db.String ( length=200 )                                          )
-    description        = db.Column( db.String ( length=500 ), unique=True                             )
-    donation_link      = db.Column( db.String ( length=500 ))
-    admin_id           = db.Column( db.Integer(           ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
-    photo              = db.Column( db.String ( length=100 ), nullable=False,           unique=True   )
+    id                 = db.Column( db.Integer (            ), primary_key=True                        )
+    name               = db.Column( db.String  ( length=50  ), nullable=False                          )
+    street_address     = db.Column( db.String  ( length=70  ), nullable=False,           unique=True   )
+    city               = db.Column( db.String  ( length=35  ), nullable=False                          )
+    state              = db.Column( db.String  ( length=2   )                                          )
+    zip_code           = db.Column( db.String  ( length=5   )                                          )
+    hours_of_operation = db.Column( db.String  ( length=70  ), nullable=False                          )
+    wish_list          = db.Column( db.String  ( length=200 )                                          )
+    description        = db.Column( db.String  ( length=500 ), unique=True                             )
+    donation_link      = db.Column( db.String  ( length=500 ))
+    admin_id           = db.Column( db.Integer (            ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
+    photo              = db.Column( db.String  ( length=100 ), nullable=False,           unique=True   )
+    volunteers = db.Relationship('User', secondary=user_garden_volunteer, viewonly=True)
     def __repr__(self):
         return f'{self.name}'
