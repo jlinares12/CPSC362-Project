@@ -23,11 +23,19 @@ Profile Page
             <label>Full Name:</label>
             <p>{{ current_user.name }}</p>
         </div>
-        <div class="detail">
-            <label>Registered Gardens:</label>
-            {% for garden in current_user.administered_gardens %}
-            <p>{{ garden.name }}</p>
-            {% endfor %}
+        <div class="garden-details">
+            <div class="detail">
+                <label>Registered Gardens:</label>
+                {% for garden in current_user.administered_gardens %}
+                <p>{{ garden.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="detail">
+                <label>Volunteered Gardens:</label>
+                {% for garden in current_user.volunteered_gardens %}
+                <p>{{ garden.name }}</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
