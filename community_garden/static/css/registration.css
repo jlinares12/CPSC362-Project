@@ -1,4 +1,3 @@
-/* From Uiverse.io by alexruix */
 .form-box {
     max-width: 400px;
     background: #e6e3e3;
@@ -14,7 +13,6 @@
     gap: 16px;
     text-align: center;
   }
-  /*Form text*/
   .title {
     font-weight: bold;
     font-size: min(5vw, 25px);
@@ -22,7 +20,6 @@
   .subtitle {
     font-size: min(2vw, 15px);
   }
-  /*Inputs box*/
   .form-container {
     overflow: hidden;
     border-radius: 8px;
@@ -55,7 +52,6 @@
     color:white;
     text-decoration: underline;
   }
-  /*Button*/
   .form .button {
     background-color: #394e38;
     color: #fff;

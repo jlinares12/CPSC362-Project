@@ -4,6 +4,7 @@ Register
 {% endblock %}
 {% block style %}
     {{super()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/garden_registration.css')}}">
 {% endblock %}
 {% block content %}
 <div class="form-box">
@@ -16,10 +17,10 @@ Register
             {{ form.city(class="input", placeholder="City") }}
             {{ form.state(class="input", placeholder="State") }}
             {{ form.zip_code(class="input", placeholder="zip code") }}
-            {{ form.description(class="input", placeholder="Description of your garden") }}
-            <label for="wish_list">List a few things you would wish people would donate</label>
-            {{ form.wish_list(id="wish_list", class="input", placeholder="") }}
-            {{ form.donation_link(id="Donation link", class="input", placeholder="Donation link") }}
+            {{ form.hours_of_operation(class="input", placeholder="Hours of operations")}}
+            {{ form.description(class="text", placeholder="Description of your garden") }}
+            {{ form.wish_list(class="text", placeholder="List a few things you would wish people could donate") }}
+            {{ form.donation_link(class="input", placeholder="Donation link") }}
             {{ form.photo(class="input", placeholder="Photo") }}
         </div>
         {{ form.submit(class="button")}}
