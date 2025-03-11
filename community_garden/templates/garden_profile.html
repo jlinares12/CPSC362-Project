@@ -11,5 +11,6 @@ Garden Profile
 {% block content %}
     <h1>This page is for {{garden.name}}</h1>
     <a href="{{garden.donation_link}}" target="_blank">Donate</a>
+    <a href="{{ url_for('volunteer_sign_up', garden=garden)}}">Volunteer</a>
     <p>{{garden.description}}</p>
 {% endblock %}
