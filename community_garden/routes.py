@@ -1,7 +1,7 @@
 from community_garden import app, db, photos
 from flask import render_template, redirect, url_for, flash, request
-from community_garden.models import User, Garden
-from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm
+from community_garden.models import User, Garden, user_garden_volunteer
+from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 
@@ -17,8 +17,7 @@ def resources_page():
 
 @app.route('/about-us')
 def about_us_page():
-    gardens = Garden.query.all()
-    return render_template('about_us_page.html', gardens=gardens)
+    return render_template('about_us_page.html')
 
 @app.route('/garden-profile/<garden>')
 def garden_profile(garden):
@@ -78,7 +77,7 @@ def register_page():
         return redirect(url_for('profile_page', username=current_user.username))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
-            flash(f'There was an error with creating a user: {err_msg}', category='danger')
+            flash(f'There was an error with creating a user: {err_msg[0]}', category='danger')
     return render_template('register_page.html', form=form)
 
 @app.route('/register-garden', methods=['GET', 'POST'])
@@ -87,7 +86,7 @@ def register_garden():
     form = RegisterGardenForm()
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)
-        garden_to_create = Garden( 
+        garden_to_create = Garden(
             name = form.name.data,
             street_address = form.street_address.data,
             city = form.city.data,
@@ -105,5 +104,21 @@ def register_garden():
         return redirect(url_for('profile_page', username=current_user.username))
     if form.errors != {}:                                           # If there are errors from the validations
         for err_msg in form.errors.values():
-            flash(f'There was an error with creating your garden: {err_msg}', category='danger')
+            flash(f'There was an error with creating your garden: {err_msg[0]}', category='danger')
     return render_template('register_garden.html', form=form)
+
+@app.route('/volunteer-sign-up/<garden>', methods=['GET', 'POST'])
+@login_required
+def volunteer_sign_up(garden):
+    current_garden = Garden.query.filter_by(name=garden).first()
+    form = VolunteerSignUpForm()
+    if form.validate_on_submit():
+        volunteer = user_garden_volunteer.insert().values(user_id=current_user.id, garden_id=current_garden.id)
+        try:
+            db.session.execute(volunteer)
+            db.session.commit()
+        except:
+            db.session.rollback()
+        flash(f'You signed up to volunteer at {current_garden.name} successfully!', category='success')
+        return redirect(url_for('profile_page', username=current_user.username))
+    return render_template('volunteer.html', form=form, garden=current_garden)
