@@ -1,7 +1,7 @@
 # run in terminal on laptop: pip install flask-wtf
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField, URLField
+from wtforms import StringField, PasswordField, TextAreaField, DateField, TimeField, SubmitField, URLField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from community_garden.models import User, Garden
 
@@ -49,3 +49,9 @@ class RegisterGardenForm( FlaskForm ):
         garden = Garden.query.filter_by(description=description_to_validate.data).first()
         if garden:
             raise ValidationError('A garden with that description already exists!')
+
+class VolunteerSignUpForm( FlaskForm ):
+    date = DateField( label="Date", validators=[DataRequired()])
+    time = TimeField( label="Time", validators=[DataRequired()])
+    message =   TextAreaField( label="message", validators=[Length(max=800)])
+    submit = SubmitField( label="Volunteer")
