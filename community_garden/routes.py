@@ -11,6 +11,16 @@ def home_page():
     gardens = Garden.query.all()
     return render_template('home.html', gardens=gardens)
 
+@app.route('/search')
+def search():
+    q = request.args.get('q')
+    if q:
+        print(q)
+        gardens = Garden.query.filter(Garden.name.icontains(q) | Garden.city.icontains(q) ).limit(20).all()
+    else:
+        gardens = Garden.query.all()
+    return render_template('search_results.html', gardens=gardens)
+
 @app.route('/resources')
 def resources_page():
     return render_template('resources_page.html')
