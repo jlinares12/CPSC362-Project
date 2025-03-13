@@ -8,35 +8,42 @@ body {
     background-color: #f4f4f4;
     min-height: 100vh;
 }
-img {
-    width: 23%;
+.logo img {
+    height: 100px;
+    width: 275px;
+    padding: 10px;
+    -webkit-filter: drop-shadow(1px 1px 5px black)
+    drop-shadow(-1px -1px 5px #637461);
+    filter: drop-shadow(0 0 0 #637461) 
+    drop-shadow(1px 1px 5px #637461);
 }
 header {
     display: flex;
     justify-content: space-between; /* Space out logo and nav */
-    align-items: flex-start; /* Align items to the top */
     background-color: #84a881;
     color: white;
     width: 100%;
-    padding: 0; /* Remove padding to hug the top */
+    padding: 0;
 }
-
-.logo {
-    min-width: 200px; /* Prevent logo from shrinking too much */
-    padding: 10px 20px; /* Add padding to the logo */
-    margin: 0; /* Remove margin to hug the top */
+.right-nav{
+    display: box;
 }
-
+.right-nav h3{
+    color: #f4f4f4;
+    text-align: center;
+    font-size: 1.5em;
+    padding-bottom: 0px;
+}
 .nav-box {
     display: flex;
     margin-left: auto;
     margin-right: 0;
-    padding: 10px 20px; /* Add padding to the nav box */
+    padding: 10px;
 }
 
 nav {
     display: flex;
-    flex-wrap: wrap; /* Allow nav items to wrap on smaller screens */
+    flex-wrap: wrap;
     width: 100%;
 }
 
@@ -44,10 +51,15 @@ nav a {
     color: black;
     text-decoration: none;
     margin: 0;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: min(4vw, 20px);
-    padding: 10px 15px;
+    padding: 0 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    border-right: 2px solid black; /* Add vertical line */
+}
+
+nav a:last-child {
+    border-right: none;
 }
 
 nav a:hover {
@@ -58,7 +70,7 @@ nav a.active {
     color: white;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
     header {
         flex-direction: column; /* Stack logo and nav vertically */
         align-items: center; /* Center items horizontally */
@@ -79,6 +91,7 @@ nav a.active {
         width: 100%; /* Full width for nav links */
         text-align: center; /* Center text in nav links */
         padding: 10px 0; /* Adjust padding for stacked layout */
+        border-right: none;
     }
 }
 
@@ -91,15 +104,15 @@ nav a.active {
 }
 
 .alert .message.danger {
-    background-color: rgb(248, 130, 130);
+    background-color: rgb(248, 130, 130, .5);
     border-color: rgb(245, 108, 108);
-    color: rgb(59, 4, 10);
+    color: rgb(0, 0, 0);
 }
 
 .alert .message.success {
-    background-color: #84a881;
+    background-color: rgba(86, 167, 78, 0.5);
     border-color: #333;
-    color: rgb(59, 4, 10);
+    color: rgb(0, 0, 0);
 }
 .content {
     flex: 1;
