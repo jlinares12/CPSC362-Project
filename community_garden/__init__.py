@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = secrets['DATABASE_URI'] # Tells python w
 app.config['SECRET_KEY'] = secrets['DEV_KEY'] # Saves a secret key to be able to prevent CSRF
 app.config['UPLOADED_PHOTOS_DEST'] = 'community_garden/static/img'
 photos = UploadSet('photos', IMAGES)
+jawg_token = secrets['JAWG_API_KEY']
 configure_uploads(app, photos)
 db = SQLAlchemy(app)    # Create an instance of SQLAlchemy called db that takes our flask app as a parameter
 bcrypt = Bcrypt(app)    # Create an instance of Bcrypt using our app as a parameter
