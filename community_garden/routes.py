@@ -1,15 +1,24 @@
-from community_garden import app, db, photos
+from community_garden import app, db, photos, jawg_token
 from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User, Garden, user_garden_volunteer
 from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
+import folium
+
+def create_map():
+    token = jawg_token
+    tiles = (f"https://tile.jawg.io/jawg-sunny/{{z}}/{{x}}/{{y}}{{r}}.png?access-token={token}")
+    attr = ('<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
+    map = folium.Map(location=[33.870350,-117.924301],tiles=tiles, attr=attr, zoom_start=10)
+    return map._repr_html_()
 
 @app.route("/")
 @app.route("/home")
 def home_page():
+    garden_map = create_map()
     gardens = Garden.query.all()
-    return render_template('home.html', gardens=gardens)
+    return render_template('home.html', gardens=gardens, map=garden_map)
 
 @app.route('/search')
 def search():
