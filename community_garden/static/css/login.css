@@ -29,11 +29,11 @@
 }
 .input {
   background: none;
-  border: 0;
   outline: 0;
   height: 40px;
   width: calc(100% - 40px);
-  border-bottom: 1px solid #eee;
+  border: 1px solid #eee;
+  border-radius: 5px;
   font-size: .9rem;
   padding: 8px 15px;
 }
