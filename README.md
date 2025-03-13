@@ -6,6 +6,8 @@
 
 ### Members: Joshua Larracas, Juan Linares, Andrew Jun
 
+## Trello Board
+https://trello.com/b/Aepe9RAO/cpsc-362-project
 
 
 
@@ -39,6 +41,6 @@ Javascript (frontend programming)
 
 ### Software:
 
-Github (https://github.com/)
+GitHub (https://github.com/)
 Flask (https://palletsprojects.com/projects/flask/)
 SQLAlchemy (https://www.sqlalchemy.org/)
