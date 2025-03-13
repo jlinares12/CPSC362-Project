@@ -31,7 +31,10 @@ Our website allows visitors to search for and apply to volunteer at nearby commu
 
 ### Programming Languages:
 
-Python
+Python      (backend programming)
+HTML       (frontend programming)
+CSS        (frontend programming)
+Javascript (frontend programming)
 
 
 ### Software:
