@@ -19,6 +19,12 @@ div.search input {
     padding: 0.5rem;
     border-radius: 5px;
     font-size: 1rem; /* Ensure text is readable on smaller screens */
+    border: 1.5px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+div.search input:focus {
+    border-color: #26b846;
 }
 
 div.gardens {
