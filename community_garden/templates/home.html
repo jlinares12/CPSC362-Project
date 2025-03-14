@@ -11,9 +11,7 @@ Home Page
 
 {% block content %}
     <div class="map-container">
-        {% if map %}
-            <iframe id="map" srcdoc="{{ map }}"></iframe>
-        {% endif %}
+        {{ map | safe }}
     </div>
     <div class="search">
         <input id="search" type="search" placeholder="Search" name="q", hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
