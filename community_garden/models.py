@@ -1,4 +1,4 @@
-from community_garden import db, bcrypt, login_manager
+from community_garden import db, bcrypt, login_manager, geolocator
 from flask_login import UserMixin
 
 @login_manager.user_loader
@@ -59,6 +59,14 @@ class Garden(db.Model):
     donation_link      = db.Column( db.String  ( length=500 ))
     admin_id           = db.Column( db.Integer (            ), db.ForeignKey('user.id'), nullable=False)  # Foreign key to User
     photo              = db.Column( db.String  ( length=100 ), nullable=False,           unique=True   )
+    latitude           = db.Column( db.Float (            ))
+    longitude          = db.Column( db.Float (            ))
     volunteers = db.Relationship('User', secondary=user_garden_volunteer, viewonly=True)
+
+    def create_coordinates(self):
+        location = geolocator.geocode(self.street_address)
+        self.latitude = location.latitude
+        self.longitude = location.longitude
+
     def __repr__(self):
         return f'{self.name}'
