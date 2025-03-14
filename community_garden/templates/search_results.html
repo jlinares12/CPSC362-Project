@@ -2,14 +2,16 @@
 <div class="gardens">
 {% for garden in gardens %}
 <a href="{{ url_for('garden_profile', garden=garden)}}">
-    <div class="banner">
-        <div class="garden-picture">
-            <img src="../static/img/{{garden.photo}}">
+    <div class="banner" id="results">
+        <div class="garden-header">
+            <div class="garden-picture">
+                <img src="../static/img/{{garden.photo}}">
+            </div>
+            <span class="title">
+                <h2>{{garden.name}}</h2>
+            </span>
         </div>
         <div class="garden-content">
-            <div class="title">
-                <h2>{{garden.name}}</h2>
-            </div>
             <div class="info">
                 <div class="address">
                     <h3>Address</h3>
@@ -17,7 +19,7 @@
                         {{ garden.city }}, {{ garden.state }} {{garden.zip_code}}
                     </p>
                 </div>
-                <div class="desctiption">
+                <div class="description">
                     <h3>Description</h3>
                     <p>{{ garden.description }}</p>
                 </div>
