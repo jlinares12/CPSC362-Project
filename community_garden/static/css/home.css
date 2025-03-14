@@ -5,7 +5,6 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     width: 45vw;
     height: auto;
-    overflow: hidden;
 }
 
 div.search input {
@@ -13,7 +12,7 @@ div.search input {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
-    width: min(100%, 550px); /* Adjusted for responsiveness */
+    width: 50vw; /* Adjusted for responsiveness */
     padding: 0.5rem;
     border-radius: 5px;
     font-size: 1rem; /* Ensure text is readable on smaller screens */
@@ -29,7 +28,7 @@ div.gardens {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /* Center the garden banners */
-    width: 90vw; /* Adjusted for responsiveness */
+    width: 50vw; /* Adjusted for responsiveness */
     margin-top: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -37,15 +36,39 @@ div.gardens {
 }
 
 div.gardens .banner {
-    display: flex;
+    display: block;
     border-radius: 8px;
     margin-top: 1rem;
-    height: 40vh;
+    height: 300px;
     text-align: left;
     background-color: white;
     width: 100%; /* Full width on small screens */
-    max-width: 80vw; /* Limit maximum width for larger screens */
-    overflow:hidden;
+    overflow:scroll;
+}
+
+div.garden-header {
+    text-align: center;
+    display: flex;
+    height:50%;
+}
+
+div.garden-header .title {
+    margin: auto;
+}
+
+div.banner h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Responsive font size */
+    margin: 0.5rem 0; /* Add some margin for spacing */
+}
+
+div.banner h3 {
+    font-size: clamp(1.2rem, 3vw, 1rem); /* Responsive font size */
+    margin: 0.5rem 0; /* Add some margin for spacing */
+}
+
+div.banner p {
+    font-size: clamp(1rem, 2.5rem, .5rem); /* Responsive font size */
+    margin: 0.5rem 0; /* Add some margin for spacing */
 }
 
 div.gardens a{
@@ -54,41 +77,40 @@ div.gardens a{
 }
 
 div.gardens .banner:hover {
+    outline: 2px solid #84a881;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
 }
 
 div.banner .garden-picture {
-    background-color: green;
-    height: 100%;
-    width: 35%;
+    width: 200px;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
-    flex-shrink: 0; /* Prevent image from shrinking */
 }
 
 div.garden-picture img {
-    height: 100%;
     width: 100%;
+    height: 100%;
     border-top-left-radius: inherit;
-    border-bottom-left-radius: inherit;
     object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
 div.garden-content {
+    background-color: rgb(132, 168, 129, 0.5);
     display: flex;
     flex-direction: column;
-    margin-left: 24px;
-    padding: 1rem; /* Add padding for better spacing */
+    padding: 2rem; /* Add padding for better spacing */
     flex-grow: 1; /* Allow content to grow and fill remaining space */
 }
 
+
 div.info {
+    margin:auto;
     display: flex;
     gap: 1rem; /* Add gap between address and description */
 }
 
 div.address {
-    width: 75%;
+    width: 100%;
 }
 
 /* Media Queries for Responsiveness */
@@ -100,6 +122,11 @@ div.address {
     div.gardens .banner {
         height: auto; /* Allow height to adjust based on content */
         flex-direction: column; /* Stack image and content vertically on small screens */
+    }
+
+    div.garden-header {
+        flex-direction: column;
+        text-align: center;
     }
 
     div.banner .garden-picture {
