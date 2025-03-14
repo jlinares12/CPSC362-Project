@@ -10,21 +10,22 @@ def create_map():
     token = jawg_token
     tiles = (f"https://tile.jawg.io/jawg-sunny/{{z}}/{{x}}/{{y}}{{r}}.png?access-token={token}")
     attr = ('<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
-    map = folium.Map(location=[33.870350,-117.924301],tiles=tiles, attr=attr, zoom_start=10)
-    return map._repr_html_()
+    map = folium.Map(location=[33.870350,-117.924301],tiles=tiles, attr=attr, zoom_start=11)
+    return map
 
 @app.route("/")
 @app.route("/home")
 def home_page():
     garden_map = create_map()
     gardens = Garden.query.all()
-    return render_template('home.html', gardens=gardens, map=garden_map)
+    for garden in gardens:
+        folium.Marker([garden.latitude, garden.longitude]).add_to(garden_map)
+    return render_template('home.html', gardens=gardens, map=garden_map._repr_html_())
 
 @app.route('/search')
 def search():
     q = request.args.get('q')
     if q:
-        print(q)
         gardens = Garden.query.filter(Garden.name.icontains(q) | Garden.city.icontains(q) ).limit(20).all()
     else:
         gardens = Garden.query.all()
@@ -117,6 +118,7 @@ def register_garden():
             donation_link = form.donation_link.data,
             admin_id = current_user.id,
             photo = filename, )
+        garden_to_create.create_coordinates()
         db.session.add(garden_to_create)
         db.session.commit()
         flash(f'You created {garden_to_create.name} successfully!', category='success')
