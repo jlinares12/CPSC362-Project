@@ -97,8 +97,8 @@ nav a.active {
 
 .alert .message {
     padding: 10px;
-    margin-top: 10px;
     margin-bottom: 10px;
+    width: 100vw;
     border: 1px solid transparent;
     border-radius: 4px;
 }
