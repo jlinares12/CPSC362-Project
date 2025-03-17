@@ -112,6 +112,7 @@ div.info {
 }
 
 div.address {
+    padding-right: 15px;
     border-right: 2px solid #394e38;
     width: 100%;
 }
@@ -148,5 +149,6 @@ div.address {
 
     div.address {
         width: 100%; /* Full width on small screens */
+        border-right: none;
     }
 }
