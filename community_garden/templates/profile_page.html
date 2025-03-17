@@ -19,21 +19,21 @@ Profile Page
 
     <!-- Profile Details -->
     <div class="profile-details">
-        <div class="detail">
-            <label>Full Name:</label>
+        <div class="detail fullname">
+            <label>Full Name</label>
             <p>{{ current_user.name }}</p>
         </div>
         <div class="garden-details">
             <div class="detail">
                 <label>Registered Gardens:</label>
                 {% for garden in current_user.administered_gardens %}
-                <p>{{ garden.name }}</p>
+                <p>- {{ garden.name }}</p>
                 {% endfor %}
             </div>
-            <div class="detail">
+            <div class="detail volunteer">
                 <label>Volunteered Gardens:</label>
                 {% for garden in current_user.volunteered_gardens %}
-                <p>{{ garden.name }}</p>
+                <p>- {{ garden.name }}</p>
                 {% endfor %}
             </div>
         </div>
@@ -42,11 +42,11 @@ Profile Page
     <!-- Edit Profile Button -->
     <div class="edit-profile">
         <a href="#" class="edit-profile-btn">Edit Profile</a>
+        <a href="#" class="edit-profile-btn">Edit Garden Profile</a>
     </div>
 
     <!-- Additional Options -->
     <div class="profile-options">
-        <a href="#" class="option-btn">Change Password</a>
         <a href="{{ url_for('logout') }}" class="option-btn logout">Logout</a>
     </div>
 </div>

@@ -13,6 +13,7 @@
 /* Profile Header */
 .profile-header {
     margin-bottom: 30px; /* Increase margin for more spacing */
+    border-bottom: 2px solid #394e38;
 }
 
 .profile-header h1 {
@@ -22,11 +23,14 @@
 }
 
 .profile-header p {
+    padding-bottom: 15px;
     margin: 0;
     color: #777;
     font-size: 20px; /* Larger font size for the email */
 }
 .garden-details {
+    margin-left: auto;
+    margin-right: auto;
     display:flex;
 }
 /* Profile Details */
@@ -38,6 +42,11 @@
 .detail {
     margin-right:auto;
     margin-bottom: 20px; /* Increase margin for more spacing */
+}
+
+.detail.volunteer {
+    margin-right: 0;
+    padding-left:10px;
 }
 
 .detail label {
@@ -54,17 +63,26 @@
     font-size: 18px; /* Larger font size for details */
 }
 
+.detail.fullname {
+    text-align: center;
+}
+
 /* Edit Profile Button */
 .edit-profile {
     margin-bottom: 30px; /* Increase margin for more spacing */
 }
 
 .edit-profile-btn {
+    display:block;
     background-color: #394e38;
     color: white;
     border: none;
     border-radius: 24px;
-    padding: 15px 30px; /* Larger padding for a bigger button */
+    padding: 15px 20px; /* Larger padding for a bigger button */
+    margin-bottom: 10px;
+    margin-left:auto;
+    margin-right: auto;
+    width: 155px;
     font-size: 18px; /* Larger font size for the button */
     cursor: pointer;
     text-decoration: none;
@@ -79,7 +97,6 @@
 .profile-options {
     display: flex;
     justify-content: center;
-    gap: 20px; /* Increase gap for more spacing between buttons */
 }
 
 .option-btn {
@@ -87,7 +104,7 @@
     color: white;
     border: none;
     border-radius: 24px;
-    padding: 15px 30px; /* Larger padding for bigger buttons */
+    padding: 15px 25px; /* Larger padding for bigger buttons */
     font-size: 16px; /* Larger font size for buttons */
     cursor: pointer;
     text-decoration: none;
