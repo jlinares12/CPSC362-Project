@@ -6,11 +6,39 @@ Garden Profile
 
 {% block style %}
     {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/garden_profile.css')}}">
 {% endblock %}
 
 {% block content %}
-    <h1>This page is for {{garden.name}}</h1>
-    <a href="{{garden.donation_link}}" target="_blank">Donate</a>
-    <a href="{{ url_for('volunteer_sign_up', garden=garden)}}">Volunteer</a>
-    <p>{{garden.description}}</p>
+    <div class="page-border">
+        <div class="inner-border">
+            <div class="links">
+                <a href="{{garden.donation_link}}" target="_blank"><button>Donate</button></a>
+                <a href="{{ url_for('volunteer_sign_up', garden=garden)}}"><button>Volunteer</button></a>
+            </div>
+            <div class="meat">
+                <div class="title-photo">
+                    <div class="title">
+                        <h1>{{garden.name}}</h1>
+                    </div>
+                    <div class="photo">
+                        <img src="../static/img/{{garden.photo}}">
+                    </div>
+                </div>
+                <div class="description">
+                    <p>{{garden.description}}</p>
+                </div>
+            </div>
+            <div class="volunteer-info">
+                <div class ="wish-list">
+                    <h3>Wish List</h3>
+                    <p>{{garden.wish_list}}</p>        
+                </div>
+                <div class="hours">
+                    <h3>Hours of Operation</h3>
+                    <p>{{garden.hours_of_operation}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
