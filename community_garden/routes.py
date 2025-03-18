@@ -32,7 +32,7 @@ def search():
         gardens = Garden.query.all()
     for garden in gardens:
             folium.Marker([garden.latitude, garden.longitude]).add_to(garden_map)
-    return render_template('search_results.html', gardens=gardens, map=garden_map._repr_html_())
+    return render_template('partials/search_results.html', gardens=gardens, map=garden_map._repr_html_(), q=q)
 
 @app.route('/resources')
 def resources_page():

@@ -3,11 +3,14 @@
     {{ map | safe }}
 </div>
 <div class="search">
-    <input id="search" type="search" placeholder="Search" name="q", hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
+    <input id="search" type="search" placeholder="Search" name="q" value="{{ q }}" hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
 </div>
 
 <div class="gardens">
+    {% if not gardens %}
+    <p>No gardens found</p>
+    {% endif %}
     {% for garden in gardens %}
         <a href="{{ url_for('garden_profile', garden=garden)}}">
             <div class="banner" id="results">
