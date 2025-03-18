@@ -55,3 +55,16 @@ class VolunteerSignUpForm( FlaskForm ):
     time = TimeField( label="Time", validators=[DataRequired()])
     message =   TextAreaField( label="message", validators=[Length(max=800)])
     submit = SubmitField( label="Volunteer")
+
+class UpdateGardenForm( FlaskForm ):
+    name = StringField( label="name", validators=[])
+    street_address = StringField( label="street", validators=[])
+    city = StringField( label="city", validators=[])
+    state = StringField( label="state", validators=[])
+    zip_code = StringField( label="zip code", validators=[])
+    hours_of_operation = StringField( label="Hours of operation", validators=[])
+    description = TextAreaField( label="description", validators=[])
+    wish_list = TextAreaField( label="wish list", validators=[])
+    donation_link = URLField( label="donation link", validators=[])
+    photo = FileField('photo',validators=[])
+    submit = SubmitField( label='Update' )
