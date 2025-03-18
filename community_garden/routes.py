@@ -1,7 +1,7 @@
 from community_garden import app, db, photos, jawg_token
 from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User, Garden, user_garden_volunteer
-from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm
+from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 import folium
@@ -143,3 +143,16 @@ def volunteer_sign_up(garden):
         flash(f'You signed up to volunteer at {current_garden.name} successfully!', category='success')
         return redirect(url_for('profile_page', username=current_user.username))
     return render_template('volunteer.html', form=form, garden=current_garden)
+
+@app.route('/update-garden-info<garden>', methods=['GET', 'POST'])
+@login_required
+def update_garden(garden):
+    curr_garden = Garden.query.filter_by(name=garden).first()
+    form = UpdateGardenForm()
+    if form.validate_on_submit():
+        for field in form:
+            if field.data and hasattr(curr_garden, field.name):
+                setattr(curr_garden, field.name, field.data)
+        db.session.commit()
+        flash(f'You have updated the info for {curr_garden.name} successfully!', category='success')
+    return render_template('update_garden.html', form=form, garden=curr_garden )
