@@ -1,31 +1,39 @@
 <link rel="stylesheet" href="{{ url_for('static',filename='css/home.css')}}">
+<div class="map-container">
+    {{ map | safe }}
+</div>
+<div class="search">
+    <input id="search" type="search" placeholder="Search" name="q", hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</div>
+
 <div class="gardens">
-{% for garden in gardens %}
-<a href="{{ url_for('garden_profile', garden=garden)}}">
-    <div class="banner" id="results">
-        <div class="garden-header">
-            <div class="garden-picture">
-                <img src="../static/img/{{garden.photo}}">
-            </div>
-            <span class="title">
-                <h2>{{garden.name}}</h2>
-            </span>
-        </div>
-        <div class="garden-content">
-            <div class="info">
-                <div class="address">
-                    <h3>Address</h3>
-                    <p>{{ garden.street_address }}<br>
-                        {{ garden.city }}, {{ garden.state }} {{garden.zip_code}}
-                    </p>
+    {% for garden in gardens %}
+        <a href="{{ url_for('garden_profile', garden=garden)}}">
+            <div class="banner" id="results">
+                <div class="garden-header">
+                    <div class="garden-picture">
+                        <img src="../static/img/{{garden.photo}}">
+                    </div>
+                    <span class="title">
+                        <h2>{{garden.name}}</h2>
+                    </span>
                 </div>
-                <div class="description">
-                    <h3>Description</h3>
-                    <p>{{ garden.description }}</p>
+                <div class="garden-content">
+                    <div class="info">
+                        <div class="address">
+                            <h3>Address</h3>
+                            <p>{{ garden.street_address }}<br>
+                                {{ garden.city }}, {{ garden.state }} {{garden.zip_code}}
+                            </p>
+                        </div>
+                        <div class="description">
+                            <h3>Description</h3>
+                            <p>{{ garden.description }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</a>
-{% endfor %}
+        </a>
+    {% endfor %}
 </div>

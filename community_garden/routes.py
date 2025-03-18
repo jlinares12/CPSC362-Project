@@ -10,7 +10,7 @@ def create_map():
     token = jawg_token
     tiles = (f"https://tile.jawg.io/jawg-sunny/{{z}}/{{x}}/{{y}}{{r}}.png?access-token={token}")
     attr = ('<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors')
-    map = folium.Map(location=[33.870350,-117.924301],tiles=tiles, attr=attr, zoom_start=11)
+    map = folium.Map(location=[33.870350,-117.924301],tiles=tiles, attr=attr, zoom_start=10)
     return map
 
 @app.route("/")
@@ -24,12 +24,15 @@ def home_page():
 
 @app.route('/search')
 def search():
+    garden_map = create_map()
     q = request.args.get('q')
     if q:
-        gardens = Garden.query.filter(Garden.name.icontains(q) | Garden.city.icontains(q) ).limit(20).all()
+        gardens = Garden.query.filter(Garden.street_address.icontains(q) | Garden.city.icontains(q) | Garden.name.icontains(q) ).limit(20).all()
     else:
         gardens = Garden.query.all()
-    return render_template('search_results.html', gardens=gardens)
+    for garden in gardens:
+            folium.Marker([garden.latitude, garden.longitude]).add_to(garden_map)
+    return render_template('search_results.html', gardens=gardens, map=garden_map._repr_html_())
 
 @app.route('/resources')
 def resources_page():
