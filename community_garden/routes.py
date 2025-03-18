@@ -1,7 +1,7 @@
 from community_garden import app, db, photos, jawg_token
 from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User, Garden, user_garden_volunteer
-from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm
+from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm, UpdateUserForm, ValidationError
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 import folium
@@ -154,8 +154,29 @@ def update_garden(garden):
     form = UpdateGardenForm()
     if form.validate_on_submit():
         for field in form:
-            if field.data and hasattr(curr_garden, field.name):
+            if field.data:
                 setattr(curr_garden, field.name, field.data)
         db.session.commit()
         flash(f'You have updated the info for {curr_garden.name} successfully!', category='success')
+    if form.errors != {}:                                           # If there are errors from the validations
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating your garden: {err_msg[0]}', category='danger')
     return render_template('update_garden.html', form=form, garden=curr_garden )
+
+@app.route('/update-user-info/<username>', methods=['GET', 'POST'])
+@login_required
+def update_user(username):
+    form = UpdateUserForm()
+    if form.validate_on_submit():
+        if current_user.check_password_correction(form.password.data):
+            flash(f'There as an error updating your info: Your new password cannot be the same as your old password', category='danger')
+            return redirect(url_for('update_user', username = current_user.username))
+        for field in form:
+            if field.data:
+                setattr(current_user, field.name, field.data)
+        db.session.commit()
+        flash(f'You have updated the info for {current_user.name} successfully!', category='success')
+    if form.errors != {}:                                           # If there are errors from the validations
+        for err_msg in form.errors.values():
+            flash(f'There was an error updating your info: {err_msg[0]}', category='danger')
+    return render_template('update_user.html', form=form, user=current_user )
