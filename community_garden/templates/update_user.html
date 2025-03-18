@@ -1,2 +1,26 @@
 {% extends 'base.html' %}
+{% block title %}
+Update Garden
+{% endblock %}
 
+{% block style %}
+    {{super()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/garden_registration.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-box">
+        <form method="POST" class="form", enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <span class="title">Fill in the info you would like to update for {{user.name}}</span>
+            <div class="form-container">
+                {{ form.name(class="input", placeholder="Full Name") }}
+                {{ form.username(class="input", placeholder="Username") }}
+                {{ form.email(class="input", placeholder="Email") }}
+                {{ form.password(class="input", placeholder="Password") }}
+                {{ form.password2(class="input", placeholder="Confirm Password") }}
+            </div>
+            {{ form.submit(class="button")}}
+        </form>
+    </div>
+{% endblock %}

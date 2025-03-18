@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, PasswordField, TextAreaField, DateField, TimeField, SubmitField, URLField
-from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
+from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, Optional
 from community_garden.models import User, Garden
 
 class RegisterUserForm( FlaskForm ):
@@ -68,3 +68,30 @@ class UpdateGardenForm( FlaskForm ):
     donation_link = URLField( label="donation link", validators=[])
     photo = FileField('photo',validators=[])
     submit = SubmitField( label='Update' )
+
+    def validate_street_address(self, address_to_validate):
+        garden = Garden.query.filter_by(street_address=address_to_validate.data).first()
+        if garden:
+            raise ValidationError('A garden with that address already exists!')
+    def validate_description(self, description_to_validate):
+        garden = Garden.query.filter_by(description=description_to_validate.data).first()
+        if garden:
+            raise ValidationError('A garden with that description already exists!')
+
+class UpdateUserForm( FlaskForm ):
+    name = StringField( label='name', validators=[Length(max=50)] )
+    username = StringField( label='username', validators=[Length(max=65)])
+    email = StringField( label='email', validators=[Optional(), Length(max=65), Email()])
+    password = PasswordField( label='password1' )
+    password2 = PasswordField( label='password2', validators=[EqualTo('password')] )
+    submit = SubmitField( label='Update' )
+
+    def validate_username(self, username_to_validate):
+        user = User.query.filter_by(username=username_to_validate.data).first()
+        if user:
+            raise ValidationError('Username already exists!')
+
+    def validate_email(self, email_to_validate):
+        email = User.query.filter_by( email=email_to_validate.data ).first()
+        if email:
+            raise ValidationError('Email address already exists!')
