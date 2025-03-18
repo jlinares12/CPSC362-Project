@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Garden
+{% endblock %}
+
+{% block style %}
+    {{super()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/garden_registration.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-box">
+        <form method="POST" class="form", enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <span class="title">Fill in the info you would like to update for {{garden.name}}</span>
+            <div class="form-container">
+                {{ form.name(class="input", placeholder="Garden Name") }}
+                {{ form.street_address(class="input", placeholder="Street Address") }}
+                {{ form.city(class="input", placeholder="City") }}
+                {{ form.state(class="input", placeholder="State") }}
+                {{ form.zip_code(class="input", placeholder="zip code") }}
+                {{ form.hours_of_operation(class="input", placeholder="Hours of operations")}}
+                {{ form.description(class="text", placeholder="Description of your garden") }}
+                {{ form.wish_list(class="text", placeholder="Wish list") }}
+                {{ form.donation_link(class="input", placeholder="Donation link") }}
+                {{ form.photo(class="input", placeholder="Photo") }}
+            </div>
+            {{ form.submit(class="button"}}
+        </form>
+    </div>
+{% endblock %}
