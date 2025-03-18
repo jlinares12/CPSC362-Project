@@ -24,16 +24,24 @@ Profile Page
             <p>{{ current_user.name }}</p>
         </div>
         <div class="garden-details">
-            <div class="detail">
+            <!-- Registered Gardens -->
+            <div class="detail registered">
                 <label>Registered Gardens:</label>
                 {% for garden in current_user.administered_gardens %}
-                <p>- {{ garden.name }}</p>
+                <div class="garden-item">
+                    <span>{{ garden.name }}</span>
+                    <a href="{{ url_for('update_garden', garden=garden) }}" class="edit-garden-btn">Edit</a>
+                </div>
                 {% endfor %}
             </div>
+
+            <!-- Volunteered Gardens -->
             <div class="detail volunteer">
                 <label>Volunteered Gardens:</label>
                 {% for garden in current_user.volunteered_gardens %}
-                <p>- {{ garden.name }}</p>
+                <div class="garden-item">
+                    <span>{{ garden.name }}</span>
+                </div>
                 {% endfor %}
             </div>
         </div>
@@ -42,7 +50,6 @@ Profile Page
     <!-- Edit Profile Button -->
     <div class="edit-profile">
         <a href="#" class="edit-profile-btn">Edit Profile</a>
-        <a href="#" class="edit-profile-btn">Edit Garden Profile</a>
     </div>
 
     <!-- Additional Options -->

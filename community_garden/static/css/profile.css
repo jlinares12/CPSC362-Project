@@ -1,24 +1,22 @@
 .profile-container {
     background-color: white;
-    margin-left: auto;
-    margin-right:auto;
+    margin: 0 auto;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     width: min(75vw, 575px);
-    height:fit-content;
     text-align: center;
 }
 
 /* Profile Header */
 .profile-header {
-    margin-bottom: 30px; /* Increase margin for more spacing */
+    margin-bottom: 30px;
     border-bottom: 2px solid #394e38;
 }
 
 .profile-header h1 {
     margin: 10px 0 5px;
-    font-size: 32px; /* Larger font size for the username */
+    font-size: 32px;
     color: #333;
 }
 
@@ -26,70 +24,88 @@
     padding-bottom: 15px;
     margin: 0;
     color: #777;
-    font-size: 20px; /* Larger font size for the email */
+    font-size: 20px;
 }
+
+/* Garden Details */
 .garden-details {
-    margin-left: auto;
-    margin-right: auto;
-    display:flex;
-}
-/* Profile Details */
-.profile-details {
-    text-align: left;
-    margin-bottom: 30px; /* Increase margin for more spacing */
+    display: flex;
+    gap: 20%; /* Add spacing between columns */
+    justify-content: space-between;
 }
 
 .detail {
-    margin-right:auto;
-    margin-bottom: 20px; /* Increase margin for more spacing */
+    flex: 1;
+    margin-bottom: 20px;
 }
 
-.detail.volunteer {
-    margin-right: 0;
-    padding-left:10px;
+.detail.fullname label {
+    text-align: center;
 }
 
 .detail label {
+    text-align: left;
     font-weight: bold;
     color: #555;
     display: block;
-    margin-bottom: 10px; /* Increase margin for more spacing */
-    font-size: 20px; /* Larger font size for labels */
+    margin-bottom: 10px;
+    font-size: 20px;
 }
 
 .detail p {
     margin: 0;
     color: #333;
-    font-size: 18px; /* Larger font size for details */
+    font-size: 18px;
 }
 
-.detail.fullname {
-    text-align: center;
+.garden-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.garden-item span {
+    color: #333;
+    font-size: 18px;
 }
 
 /* Edit Profile Button */
 .edit-profile {
-    margin-bottom: 30px; /* Increase margin for more spacing */
+    margin-bottom: 30px;
 }
 
 .edit-profile-btn {
-    display:block;
+    display: inline-block;
     background-color: #394e38;
     color: white;
     border: none;
     border-radius: 24px;
-    padding: 15px 20px; /* Larger padding for a bigger button */
-    margin-bottom: 10px;
-    margin-left:auto;
-    margin-right: auto;
-    width: 155px;
-    font-size: 18px; /* Larger font size for the button */
+    padding: 15px 20px;
+    font-size: 18px;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
 .edit-profile-btn:hover {
+    background-color: #455e44;
+}
+
+/* Edit Garden Button */
+.edit-garden-btn {
+    background-color: #84a881;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.edit-garden-btn:hover {
     background-color: #455e44;
 }
 
@@ -104,8 +120,8 @@
     color: white;
     border: none;
     border-radius: 24px;
-    padding: 15px 25px; /* Larger padding for bigger buttons */
-    font-size: 16px; /* Larger font size for buttons */
+    padding: 15px 25px;
+    font-size: 16px;
     cursor: pointer;
     text-decoration: none;
     transition: background-color 0.3s ease;
