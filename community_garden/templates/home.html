@@ -16,7 +16,6 @@ Home Page
         </div>
         <div class="search">
             <input id="search" type="search" placeholder="Search" name="q", hx-get="/search" hx-trigger="keyup changed delay:500ms" hx-target="#results">
-            <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         </div>
 
         <div class="gardens">
@@ -49,5 +48,6 @@ Home Page
                 </a>
             {% endfor %}
         </div>
+        <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     </div>
 {% endblock %}
