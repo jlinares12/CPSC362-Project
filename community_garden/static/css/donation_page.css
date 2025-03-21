@@ -1,0 +1,63 @@
+.donation-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.garden-photo {
+    width: 500px; /* Default width for larger screens */
+    height: 300px; /* Default height for larger screens */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.donation-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    margin-left: 0;
+    width: 80%;
+    height: 20vh;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-control:focus{
+    border-color: #26b846;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #394e38;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #455e44;
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .garden-photo {
+        width: 250px; /* Slightly smaller for tablets */
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .garden-photo {
+        width: 200px; /* Even smaller for mobile phones */
+        height: 120px;
+    }
+}
