@@ -20,7 +20,7 @@ class RegisterUserForm( FlaskForm ):
     username = StringField( label='username', validators=[Length(max=65), DataRequired()])
     email = StringField( label='email', validators=[Length(min=3, max=65), Email(), DataRequired()])
     password1 = PasswordField( label='password1', validators=[Length(min=10), DataRequired()] )
-    password2 = PasswordField( label='password2', validators=[EqualTo('password1'), DataRequired()] )
+    password2 = PasswordField( label='password2', validators=[EqualTo('password1', message="Passwords must match"), DataRequired()] )
     submit = SubmitField( label='Sign up' )
 
 class LoginForm (FlaskForm ):
@@ -83,15 +83,21 @@ class UpdateUserForm( FlaskForm ):
     username = StringField( label='username', validators=[Length(max=65)])
     email = StringField( label='email', validators=[Optional(), Length(max=65), Email()])
     password = PasswordField( label='password1' )
-    password2 = PasswordField( label='password2', validators=[EqualTo('password')] )
+    password2 = PasswordField( label='password2', validators=[EqualTo('password', message="Passwords must match")])
+    curr_username = StringField()
+    curr_email = StringField()
     submit = SubmitField( label='Update' )
 
     def validate_username(self, username_to_validate):
+        if username_to_validate.data == self.curr_username:
+            raise ValidationError('New username cannot be the same as old username')
         user = User.query.filter_by(username=username_to_validate.data).first()
         if user:
             raise ValidationError('Username already exists!')
 
     def validate_email(self, email_to_validate):
+        if email_to_validate.data == self.curr_email:
+            raise ValidationError('New email cannot be the same as old email')
         email = User.query.filter_by( email=email_to_validate.data ).first()
         if email:
             raise ValidationError('Email address already exists!')

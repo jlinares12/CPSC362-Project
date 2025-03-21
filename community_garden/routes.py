@@ -167,6 +167,8 @@ def update_garden(garden):
 @login_required
 def update_user(username):
     form = UpdateUserForm()
+    form.curr_email = current_user.email
+    form.curr_username = current_user.username
     if form.validate_on_submit():
         if current_user.check_password_correction(form.password.data):
             flash(f'There as an error updating your info: Your new password cannot be the same as your old password', category='danger')
