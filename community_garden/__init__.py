@@ -6,6 +6,7 @@ from dotenv import dotenv_values
 from flask_uploads import  configure_uploads, IMAGES, UploadSet
 from geopy.geocoders import Nominatim
 from flask_migrate import Migrate
+from flask_mail import Mail
 
 secrets = dotenv_values(".env")
 app = Flask(__name__)   # Create an instance of a FLASK app called app
@@ -21,6 +22,17 @@ bcrypt = Bcrypt(app)    # Create an instance of Bcrypt using our app as a parame
 login_manager = LoginManager(app)
 login_manager.login_view = 'login_page'
 login_manager.login_message_category = 'danger'
+
+# Config for mailing feature
+
+app.config['MAIL_SERVER'] = secrets['MAIL_SERVER']
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = secrets['MAIL_USERNAME']
+app.config['MAIL_PASSWORD'] = secrets['MAIL_PASSWORD']
+app.config['MAIL_DEFAULT_SENDER'] = secrets['MAIL_USERNAME']
+
+mail = Mail(app)
 
 geolocator = Nominatim(user_agent="community_garden_flask_app")
 from community_garden import routes
