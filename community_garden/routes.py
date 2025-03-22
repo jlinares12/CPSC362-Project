@@ -144,9 +144,9 @@ def volunteer_sign_up(garden):
             db.session.commit()
         except:
             db.session.rollback()
-        send_email(form, current_garden)
+        send_volunteer_email(form, current_garden)
         flash(f'You signed up to volunteer at {current_garden.name} successfully!', category='success')
-        return redirect(url_for('profile_page', username=current_user.username))
+        return redirect(url_for('garden_profile', garden = current_garden))
     return render_template('volunteer.html', form=form, garden=current_garden)
 
 @app.route('/donate/<garden>', methods=['GET', 'POST'])
@@ -155,7 +155,9 @@ def donation_page(garden):
     current_garden = Garden.query.filter_by(name = garden).first()
     form = DonationForm()
     if form.validate_on_submit():
-        print(form.message.data)
+        send_donation_email(form, current_garden)
+        flash(f'Your message was sent to the admin of {current_garden.name} successfully! They will get back to you shortly', category='success')
+        return redirect( url_for('garden_profile', garden = current_garden))
     return render_template('donate.html', form = form, garden = current_garden)
 
 @app.route('/update-garden-info<garden>', methods=['GET', 'POST'])
@@ -195,13 +197,32 @@ def update_user(username):
     return render_template('update_user.html', form=form, user=current_user )
 
 @login_required
-def send_email(form, garden):
+def send_volunteer_email(form, garden):
     admin = User.query.filter_by(id = garden.admin_id).first()
     msg = Message(
-        subject='New Volunteer Submission',
-        recipients={admin.email}
+        subject = 'New Volunteer Submission',
+        recipients = [admin.email]
     )
-    msg.body = (f"The contact information for the volunteer is: {current_user.email} They have signed up to volunteer on {form.date.data} at {form.time.data}")
+    if form.message.data:
+        html_content = render_template('emails/volunteer_email1.html',
+                                        date = form.date.data,
+                                        time = form.time.data,
+                                        volunteer_email = current_user.email,
+                                        message = form.message.data)
+    else:
+        html_content = render_template('emails/volunteer_email2.html',
+                                        date = form.date.data,
+                                        time = form.time.data,
+                                        volunteer_email = current_user.email)
+    msg.html= html_content
     mail.send(msg)
-    #print('sent email')
-   # return 'Email sent!'
+
+@login_required
+def send_donation_email(form, garden):
+    admin = User.query.filter_by(id = garden.admin_id).first()
+    msg = Message(
+        subject = 'Donation Request',
+        recipients = [admin.email]
+    )
+    msg.html = render_template('emails/donation_email.html', message = form.message.data, email = current_user.email )
+    mail.send(msg)
