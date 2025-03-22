@@ -101,7 +101,7 @@ class UpdateUserForm( FlaskForm ):
         email = User.query.filter_by( email=email_to_validate.data ).first()
         if email:
             raise ValidationError('Email address already exists!')
-        
+
 class DonationForm( FlaskForm ):
-    message =   TextAreaField( label="message", validators=[Length(max=800)])
+    message =   TextAreaField( label="message", validators=[Length(max=800), DataRequired()])
     submit = SubmitField( label="Send")
