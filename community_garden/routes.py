@@ -1,10 +1,11 @@
-from community_garden import app, db, photos, jawg_token
+from community_garden import app, db, photos, jawg_token, mail
 from flask import render_template, redirect, url_for, flash, request
 from community_garden.models import User, Garden, user_garden_volunteer
 from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm, UpdateUserForm, DonationForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 import folium
+from flask_mail import Message
 
 def create_map():
     token = jawg_token
@@ -143,6 +144,7 @@ def volunteer_sign_up(garden):
             db.session.commit()
         except:
             db.session.rollback()
+        send_email(form, current_garden)
         flash(f'You signed up to volunteer at {current_garden.name} successfully!', category='success')
         return redirect(url_for('profile_page', username=current_user.username))
     return render_template('volunteer.html', form=form, garden=current_garden)
@@ -191,3 +193,15 @@ def update_user(username):
         for err_msg in form.errors.values():
             flash(f'There was an error updating your info: {err_msg[0]}', category='danger')
     return render_template('update_user.html', form=form, user=current_user )
+
+@login_required
+def send_email(form, garden):
+    admin = User.query.filter_by(id = garden.admin_id).first()
+    msg = Message(
+        subject='New Volunteer Submission',
+        recipients={admin.email}
+    )
+    msg.body = (f"The contact information for the volunteer is: {current_user.email} They have signed up to volunteer on {form.date.data} at {form.time.data}")
+    mail.send(msg)
+    #print('sent email')
+   # return 'Email sent!'
