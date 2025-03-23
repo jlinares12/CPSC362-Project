@@ -4,13 +4,42 @@
 Volunteer Sign Up
 {% endblock %}
 
+{% block style %}
+    {{super()}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/volunteer_page.css')}}">
+{% endblock %}
+
 {% block content %}
-    <h1>This volunteer sign up is for {{garden.name}}</h1>
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.date() }}
-        {{ form.time()}}
-        {{ form.message() }}
-        {{ form.submit() }}
-    </form>
+    <div class="form-box">
+        <div class="title">
+            <h1>Volunteer at {{garden.name}}</h1>
+        </div>
+        <div class="body">
+            <div class="info">
+                <h3>Hours of Operations</h3>
+                <p>{{ garden.hours_of_operation }}</p>
+                <h3>Description of <b>{{ garden.name }}</b></h3>
+                <p>{{garden.description}}</p>
+            </div>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-container">
+                    <div class = "volunteer-info">
+                        <div class="date">
+                            <label for="date">Select a date to volunteer</label>
+                            {{ form.date( id="date") }}
+                        </div>
+                        <div class = "time">
+                            <label for="time">Select a time to volunteer</label>
+                            {{ form.time( id="time" )}}
+                        </div>
+                    </div>
+                    <label for="message">You can let the admin of the garden know more about you here
+                    <br>(You can include other methods of contact)</label>
+                    {{ form.message( class="text",placeholder="Enter your message here..." ) }}
+                    {{ form.submit(class="button") }}
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
