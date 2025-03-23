@@ -3,8 +3,11 @@
     max-width: 950px;
 }
 .links {
+    justify-content: right;
+    display: flex;
     text-align: right;
     padding-bottom: 3px;
+    gap: 10px;
 }
 .meat {
     display: box;
@@ -12,6 +15,7 @@
 }
 .title-photo{
     display: flex;
+    gap: 5px;
 }
 .title-photo .title {
     width: 50%;
@@ -32,4 +36,22 @@
 }
 .volunteer-info .wish-list {
     width:50%;
+}
+
+button {
+    margin-top: 15px;
+    background-color: #394e38;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #455e44;
 }
