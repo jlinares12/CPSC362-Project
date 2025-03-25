@@ -20,8 +20,10 @@ def home_page():
     garden_map = create_map()
     gardens = Garden.query.all()
     for garden in gardens:
-        folium.Marker([garden.latitude, garden.longitude]).add_to(garden_map)
-    return render_template('home.html', gardens=gardens, map=garden_map._repr_html_())
+        folium.Marker(location = [garden.latitude, garden.longitude],
+                      popup = folium.Popup(render_template('partials/map_pop_up.html', garden = garden),
+                      max_width = 350)).add_to(garden_map)
+    return render_template('home.html', gardens=gardens, map=garden_map.get_root()._repr_html_())
 
 @app.route('/search')
 def search():
@@ -32,7 +34,9 @@ def search():
     else:
         gardens = Garden.query.all()
     for garden in gardens:
-            folium.Marker([garden.latitude, garden.longitude]).add_to(garden_map)
+            folium.Marker(location = [garden.latitude, garden.longitude],
+                          popup = folium.Popup(render_template('partials/map_pop_up.html', garden = garden),
+                          max_width = 350)).add_to(garden_map)
     return render_template('partials/search_results.html', gardens=gardens, map=garden_map._repr_html_(), q=q)
 
 @app.route('/resources')
