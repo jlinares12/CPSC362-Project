@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if( currentPath === '/') {
         navLinks.item(0).classList.add('active');
     }
-    
+
     // Loop through each navigation link
     navLinks.forEach(link => {
         // Check if the link's href matches the current path
