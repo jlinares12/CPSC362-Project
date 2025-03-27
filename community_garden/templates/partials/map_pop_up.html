@@ -1,9 +1,22 @@
-<!--<a href="{{ url_for('garden_profile', garden=garden)}}">-->
-    <div>
-        <h1>{{garden.name}}</h1>
-        <p> {{garden.street_address}}<br>
-            {{garden.city}},
-            {{garden.state}}<br>
-            {{garden.zip_code}}</p>
+<link rel="stylesheet" href="{{url_for('static', filename='css/popup.css')}}">
+
+<div class="main">
+    <div class="title">
+        <h1><b>{{garden.name}}</b></h1>
     </div>
-<!--</a>-->
+    <div class="body">
+        <div class="address">
+            <p>{{garden.street_address}}<br>
+                {{garden.city}},
+                {{garden.state}}<br>
+                {{garden.zip_code}}</p>
+        </div>
+        <div class="button-container">
+            <a href="{{ url_for('garden_profile', garden=garden)}}" target="_parent">
+                <button>
+                    View<br>Garden
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
