@@ -38,7 +38,7 @@
     width:50%;
 }
 
-button {
+.button {
     margin-top: 15px;
     background-color: #394e38;
     color: #fff;
@@ -52,6 +52,6 @@ button {
     width: 100%;
 }
 
-button:hover {
+.button:hover {
     background-color: #455e44;
 }
