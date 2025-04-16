@@ -1,5 +1,22 @@
 # CPSC362-Project
 
+## Requirements
+
+This project runs natively on your computer.
+First make sure you have python3 installed
+
+After downloading python3 please download Flask web framework.
+Then, download the following flask libraries:
+* Flask SQLAlchemy
+* Flask Bcrypt
+* Flask Login
+* Flask Reuploaded
+* Flask Migrate
+* Flask Mail
+* Flask WTF
+
+You will also need to download Dotenv, Django, Folium and finally Geopy
+
 ## Community Garden Website
 
 ### https://github.com/jlinares12/CPSC362-Project
