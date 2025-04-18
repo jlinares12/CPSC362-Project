@@ -1,7 +1,7 @@
-from community_garden import app, db, photos, jawg_token, mail
+from __init__ import app, db, photos, jawg_token, mail
 from flask import render_template, redirect, url_for, flash, request
-from community_garden.models import User, Garden, user_garden_volunteer
-from community_garden.forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm, UpdateUserForm, DonationForm
+from models import User, Garden, user_garden_volunteer
+from forms import RegisterUserForm, LoginForm, RegisterGardenForm, VolunteerSignUpForm, UpdateGardenForm, UpdateUserForm, DonationForm
 from flask_login import login_user, logout_user, login_required, current_user
 from django.utils.http import url_has_allowed_host_and_scheme
 import folium
