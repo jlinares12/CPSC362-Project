@@ -1,4 +1,4 @@
-from __init__ import db, bcrypt, login_manager, geolocator
+from community_garden import db, bcrypt, login_manager, geolocator
 from flask_login import UserMixin
 
 @login_manager.user_loader

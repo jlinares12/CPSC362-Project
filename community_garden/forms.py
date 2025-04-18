@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired
 from wtforms import StringField, PasswordField, TextAreaField, DateField, TimeField, SubmitField, URLField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError, Optional
-from models import User, Garden
+from community_garden.models import User, Garden
 
 class RegisterUserForm( FlaskForm ):
     def validate_username(self, username_to_validate):

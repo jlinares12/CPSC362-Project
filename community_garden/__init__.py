@@ -36,4 +36,4 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
 mail = Mail(app)
 
 geolocator = Nominatim(user_agent="community_garden_flask_app")
-import routes
+from community_garden import routes
