@@ -118,7 +118,22 @@ div.address {
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+
+@media (max-width: 872px) {
+    .content div.map-container {
+        width: 65vw;
+    }
+
+    div.gardens .banner {
+        width: 65vw;
+    }
+}
+
+@media (max-width: 722px) {
+    .content div.map-container {
+        width: 90vw;
+    }
+
     div.gardens .banner {
         width: 85vw;
         height: auto; /* Allow height to adjust based on content */

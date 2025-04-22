@@ -36,8 +36,14 @@
                 </nav>
             </div>
             <h3>Local Needs, Local Solutions</h3>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
         </div>
     </header>
+    <script src="{{ url_for('static', filename='js/responsiveBasePage.js') }}"></script>
 
     <div class="alert">
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -52,7 +58,6 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <script src="{{url_for('static', filename='js/errorMessage.js')}}"></script>
     </div>
 
     <div class="content">
@@ -65,6 +70,7 @@
             <p>&copy; 2023 Community. All rights reserved.</p>
         </footer>
     </div>
+    <script src="{{url_for('static', filename='js/errorMessage.js')}}"></script>
     <script src="{{ url_for('static', filename='js/navSelector.js') }}"></script>
 </body>
 </html>
