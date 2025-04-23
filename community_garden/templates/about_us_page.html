@@ -1,9 +1,46 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Volunteer
+{% block title %}About Us | Community Gardens{% endblock %}
+
+{% block style %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
 {% endblock %}
 
 {% block content %}
+<div class="about-container">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Cultivating Community Connections</h1>
+            <p class="subtitle">Growing together for a healthier, more sustainable Southern California</p>
+        </div>
+    </section>
 
+    <section class="about-section">
+        <div class="about-content">
+            <h2>Our Story</h2>
+            <div class="about-text">
+                <p>A strong and supportive community is a vital aspect of all lifestyles, and community gardens are a great example of the good that can sprout from neighborly contributions and efforts. Not only do community gardens provide affordable, locally grown fruits and vegetables, but they also enhance communities through education and collaboration.</p>
+
+                <p>In this modern age, discovering a city's amenities can be as simple as checking the city website, but our team wanted to take accessibility one step further: featuring Community Gardens!</p>
+
+                <p>By utilizing mapping functionalities and community inputs, our website creates an easily accessible compilation of all community gardens in the Southern California area. From general information about your city's garden to information on starting a garden of your own, Community Gardens is a hub for like-minded individuals interested in supporting their community in a healthy and sustainable way.</p>
+            </div>
+
+            <div class="mission-card">
+                <h3>Our Mission</h3>
+                <p>Our mission is to expand community connections for various SoCal cities, offering community garden services as well as encouraging individuals to start some for their own cities. Visitors to our website are invited to search and apply for volunteer opportunities, donate to their local garden, or even register a garden of their own!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Join the Movement</h2>
+            <p>Whether you are simply looking for your local community garden or are interested in volunteering or donating, Community Gardens offers a variety of resources.</p>
+
+            <p class="small-text">Check out our <a href="{{ url_for('resources_page') }}">FAQs</a> for more information, or <a href="mailto:juanlinares821@yahoo.com">contact us</a> with any inquiries. Happy gardening!</p>
+        </div>
+    </section>
+</div>
 {% endblock %}

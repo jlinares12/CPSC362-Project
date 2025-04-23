@@ -1,0 +1,124 @@
+:root {
+    --primary-green: #2e7d32;
+    --light-green: #60ad5e;
+    --dark-green: #005005;
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --card-bg: #ffffff;
+    --dark-text: #333333;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Base Styles */
+.resources-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-text);
+}
+
+/* Hero Section */
+.resources-hero {
+    background-color: var(--primary-green);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 2.5rem;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* FAQ Section */
+.faq-section {
+    padding: 0 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.faq-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.faq-content h2 {
+    color: var(--dark-green);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+}
+
+.faq-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-top: 3px solid var(--light-green);
+}
+
+.faq-card h3 {
+    color: var(--primary-green);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.faq-card p {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resources-hero {
+        height: 250px;
+        padding: 0 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .faq-section {
+        padding: 0 1rem;
+    }
+
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .resources-hero {
+        height: 200px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.7rem;
+    }
+}

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Garden Profile
+{{garden.name}} | Community Garden
 {% endblock %}
 
 {% block style %}
@@ -10,31 +10,34 @@ Garden Profile
 {% endblock %}
 
 {% block content %}
-    <div class="page-border">
-        <div class="inner-border">
-            <div class="links">
-                <a href="{{url_for('donation_page', garden=garden)}}"><button class="button">Donate</button></a>
-                <a href="{{ url_for('volunteer_sign_up', garden=garden)}}"><button class="button">Volunteer</button></a>
-            </div>
-            <div class="meat">
-                <div class="title-photo">
-                    <div class="title">
-                        <h1>{{garden.name}}</h1>
-                    </div>
-                    <div class="photo">
-                        <img src="../static/img/{{garden.photo}}">
-                    </div>
+    <div class="garden-container">
+        <div class="garden-header">
+            <div class="garden-title">
+                <h1>{{garden.name}}</h1>
+                <div class="action-buttons">
+                    <a href="{{url_for('donation_page', garden=garden)}}" class="cta-button donate">Donate</a>
+                    <a href="{{ url_for('volunteer_sign_up', garden=garden)}}" class="cta-button volunteer">Volunteer</a>
                 </div>
-                <div class="description">
+            </div>
+        </div>
+
+        <div class="garden-content">
+            <div class="garden-intro">
+                <div class="garden-image">
+                    <img src="../static/img/{{garden.photo}}" alt="{{garden.name}} community garden" class="feature-image">
+                </div>
+                <div class="garden-description card">
+                    <h2>About Our Garden</h2>
                     <p>{{garden.description}}</p>
                 </div>
             </div>
-            <div class="volunteer-info">
-                <div class ="wish-list">
+
+            <div class="garden-details">
+                <div class="wish-list card">
                     <h3>Wish List</h3>
                     <p>{{garden.wish_list}}</p>
                 </div>
-                <div class="hours">
+                <div class="hours card">
                     <h3>Hours of Operation</h3>
                     <p>{{garden.hours_of_operation}}</p>
                 </div>

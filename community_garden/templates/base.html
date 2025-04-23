@@ -13,14 +13,14 @@
     {% endblock %}
 </head>
 <body>
-    <header>
-        <div class="logo">
+    <header class="{% if current_user.is_authenticated %}authenticated{% endif %}">
+        <div class="logo {% if current_user.is_authenticated %}authenticated{% endif %}">
                 <a href="{{ url_for('home_page')}}">
                     <img src="../static/img/header_imgs/logo.png">
                 </a>
         </div>
-        <div class="right-nav">
-            <div class="nav-box">
+        <div class="right-nav {% if current_user.is_authenticated %}authenticated{% endif %}">
+            <div class="nav-box {% if current_user.is_authenticated %}authenticated{% endif %}">
                 <nav>
                     <a href="{{ url_for('home_page')}}">Home</a>
                     <a href="{{ url_for('about_us_page')}}">About Us</a>
@@ -36,7 +36,7 @@
                 </nav>
             </div>
             <h3>Local Needs, Local Solutions</h3>
-            <div class="hamburger">
+            <div class="hamburger {% if current_user.is_authenticated %}authenticated{% endif %}">
                 <div class="line"></div>
                 <div class="line"></div>
                 <div class="line"></div>

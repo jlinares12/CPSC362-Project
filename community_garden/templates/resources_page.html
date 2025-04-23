@@ -1,5 +1,47 @@
 {% extends 'base.html' %}
 
-{% block title %}
-Resources
+{% block title %}Resources & FAQ | Community Gardens{% endblock %}
+
+{% block style %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/resources.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="resources-container">
+    <section class="resources-hero">
+        <div class="hero-content">
+            <h1>Resources & FAQs</h1>
+            <p class="subtitle">Find answers to common questions about community gardens</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="faq-content">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-grid">
+                <div class="faq-card">
+                    <h3>How do I find my local community garden?</h3>
+                    <p>You can find your local community garden through the map locator on the Home page, or select it from the list of community gardens.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>How can I volunteer for my local community garden?</h3>
+                    <p>Sign up through our login system and volunteer by first selecting your desired garden and then pressing the 'Volunteer' button. Please note that you must have an account created with us.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>How can I donate to my local community garden?</h3>
+                    <p>Locate your desired garden and then press the 'Donate' button, where you will be able to make a monetary or wishlist donation.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>How can I register my local community garden?</h3>
+                    <p>You can register your own garden by first creating a profile by clicking on "Sign Up" tab. After creating your profile, you will be able to locate a tab called "Register a Garden"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}
