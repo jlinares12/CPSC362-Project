@@ -45,6 +45,13 @@ Our website allows visitors to search for and apply to volunteer at nearby commu
 
 ### Login/Sign up
 
+## Diagrams
+![Garden Activity Diagram](https://github.com/user-attachments/assets/0e2d1469-47ff-40fb-936c-ffe00cff3206)
+![Community Garden Use Case](https://github.com/user-attachments/assets/4a908f68-a800-4427-a4e4-906f0306526a)
+![Community Garden Class Diagram 1](https://github.com/user-attachments/assets/8762bc62-7ff3-4c1c-be51-f13ea8507fb3)
+![Community Garden Class Diagram 2](https://github.com/user-attachments/assets/90f6b370-d37f-4c90-a75c-4611caf8cfcc)
+![Community Garden Class Diagram 3](https://github.com/user-attachments/assets/5b06f163-20fe-4793-92e9-4e31e6146a39)
+
 
 ## Systems used:
 
