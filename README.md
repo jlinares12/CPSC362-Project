@@ -21,14 +21,13 @@ You will also need to download Dotenv, Django, Folium and finally Geopy
 
 ### https://github.com/jlinares12/CPSC362-Project
 
-## Link to Website
+## [Link to Website](https://juanlinares821.pythonanywhere.com/home)
 
-### https://juanlinares821.pythonanywhere.com/home
+### [Presentation](https://docs.google.com/presentation/d/1Qa5OMxnuO3wO8Mhk078TkD57OQtabEs0JBxn8KpXIFE/edit?slide=id.g2768016a92f_2_0#slide=id.g2768016a92f_2_0)
 
 ### Members: Joshua Larracas, Juan Linares, Andrew Jun
 
-## Trello Board
-https://trello.com/b/Aepe9RAO/cpsc-362-project
+## [Trello Board](https://trello.com/b/Aepe9RAO/cpsc-362-project)
 
 
 
